@@ -1,0 +1,26 @@
+/target/
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+
+#---------------------------------------#
+# IDEs & Editors Ignores                #
+#---------------------------------------#
+
+# JetBrains IDEs
+.idea/
+*.iml
+
+# Eclipse
+.project
+.classpath
+.settings
+
+# Netbeans
+nbactions*.xml
+nb-configuration*.xml
