@@ -37,6 +37,12 @@ public class Rail {
 		this.incident = incident;
 	}	
 	
-	
+	public boolean isLinkedTo(Station station) {
+		if(this.depart == station || this.arrivee == station) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 
 }
