@@ -1,8 +1,9 @@
 package metroproject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Metro {
+public class Metro implements Serializable{
 
 	private ArrayList<Station> stations;
 	private ArrayList<Rail> rails;

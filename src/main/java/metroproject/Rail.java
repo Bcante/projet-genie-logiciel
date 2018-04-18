@@ -1,6 +1,8 @@
 package metroproject;
 
-public class Rail {
+import java.io.Serializable;
+
+public class Rail implements Serializable{
 	Station depart, arrivee;
 	int duree;
 	boolean incident;
