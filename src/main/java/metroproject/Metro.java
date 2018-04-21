@@ -2,27 +2,28 @@ package metroproject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Metro implements Serializable{
 
-	private ArrayList<Station> stations;
+	private HashMap<String,Station> stations;
 	private ArrayList<Rail> rails;
 	
 	public Metro() {
-		this(new ArrayList<Station>(),new ArrayList<Rail>());
+		this(new HashMap<String,Station>(),new ArrayList<Rail>());
 	}
 
 	
-	public Metro(ArrayList<Station> stations, ArrayList<Rail> rails) {
+	public Metro(HashMap<String,Station> stations, ArrayList<Rail> rails) {
 		this.stations = stations;
 		this.rails = rails;
 	}
 
-	public ArrayList<Station> getStations() {
+	public HashMap<String,Station> getStations() {
 		return stations;
 	}
 
-	public void setStations(ArrayList<Station> stations) {
+	public void setStations(HashMap<String,Station> stations) {
 		this.stations = stations;
 	}
 
@@ -43,7 +44,7 @@ public class Metro implements Serializable{
 	
 	public void addStation(String nom) {
 		Station stationToAdd = new Station(nom);
-		this.stations.add(stationToAdd);
+		this.stations.put(nom,stationToAdd);
 	}
 	
 	//Vérifie s'il existe un lien direct (un rail) entre les deux stations
