@@ -16,7 +16,7 @@ class TestSerial {
         grandMetro.addStation("Paris");
         grandMetro.addStation("Berlin");
 
-        grandMetro.addRail(grandMetro.getStations().get(0),grandMetro.getStations().get(1),5,false);
+        grandMetro.addRail(grandMetro.getStations().get("Paris"),grandMetro.getStations().get("Berlin"),5,false);
 
         GestionnaireSauvegarde.sauvegarde(grandMetro);
 
