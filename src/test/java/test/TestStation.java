@@ -11,27 +11,30 @@ import metroproject.Station;
 
 class TestStation {
 
+	Station s1;
+	Station s2;
+	Rail r;
+	
+	@BeforeEach
+	void beforeEach() {
+		s1 = new Station("test1");
+		s2 = new Station("test2");
+		r = new Rail(s1, s2, 5, false);
+	}
 	
 	@Test
 	void testGetTest() {
-		Station s1 = new Station("test1");
 		assertEquals("test1", s1.getNomStation());
 	}
 	
 	@Test
 	void testAddRailTest() {
-		Station s1 = new Station("test1");
-		Station s2 = new Station("test2");
-		Rail r = new Rail(s1, s2, 5, false);
 		s1.addRailtoStation(r);
 		assertEquals(r, s1.getRails().get(0));
 	}
 	
 	@Test
 	void testGetConnectionsTest() {
-		Station s1 = new Station("test1");
-		Station s2 = new Station("test2");
-		Rail r = new Rail(s1, s2, 5, false);
 		s1.addRailtoStation(r);
 		assertEquals(s2, s1.getConnections().get(0));
 	}
@@ -41,9 +44,6 @@ class TestStation {
 	@Test
 	@DisplayName("Une connection n'a pas de sens")
 	void testGetConnectionsSensInverseTest() {
-		Station s1 = new Station("test1");
-		Station s2 = new Station("test2");
-		Rail r = new Rail(s2, s1, 5, false);
 		s1.addRailtoStation(r);
 		assertEquals(s2, s1.getConnections().get(0));
 	}
