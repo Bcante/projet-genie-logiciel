@@ -47,8 +47,36 @@ public class Metro implements Serializable{
 		this.stations.put(nom,stationToAdd);
 	}
 	
-	//Vérifie s'il existe un lien direct (un rail) entre les deux stations
+	public Station getStation(String nom) {
+		return stations.get(nom);
+	}
+	//Vérifie s'il existe un chemin quelconque entre les deux stations
+	
 	public boolean areConnected(Station s1, Station s2) {
+		//Inspiré de l'algorithme de recherche A*
+		ArrayList<Station> parcours = new ArrayList<Station>(); //les stations à parcourir
+		ArrayList<Station> vu = new ArrayList<Station>(); //les stations déjà parcourues
+		boolean existe=false;
+		parcours.add(s1); //point de départ
+		while ((parcours.size()!=0)&(existe==false)) {
+		ArrayList<Station> sauvegarde=parcours.get(0).getConnections();
+			while(sauvegarde.size()!=0) {
+				if (vu.indexOf(sauvegarde.get(0))==-1) { //la station n'a pas été parcourue
+					parcours.add(sauvegarde.get(0)); //la station est dans le parcours
+					vu.add(sauvegarde.get(0)); //elle a été vue 
+				}
+				if(sauvegarde.get(0).equals(s2)) {
+					existe=true;
+				}
+				sauvegarde.remove(0);
+			}
+			parcours.remove(0);
+		}
+		return existe;
+	}
+	
+	//Vérifie s'il existe un lien direct (un rail) entre les deux stations
+	public boolean areLinked(Station s1, Station s2) {
 		boolean res = false;
 		for(Rail rail : this.rails) {
 			if (rail.isLinkedTo(s1) && rail.isLinkedTo(s2)) {
@@ -57,11 +85,7 @@ public class Metro implements Serializable{
 			}
 		}
 		return res;
-	}
-	
-	//Vérifie s'il existe un chemin quelconque entre les deux stations
-	public boolean areLinked(Station s1, Station s2) {
-		return false;
+		
 	}
 	
 	public void delRail(Station s1, Station s2) {
