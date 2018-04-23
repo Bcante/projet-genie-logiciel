@@ -89,26 +89,26 @@ class testMetro {
 	@DisplayName("Connexion directe entre deux stations")
 	void areConnectedTest() {
 		m.addRail(s1,s2 , 5, false);
-		assertTrue(m.areConnected(s1, s2));
+		assertTrue(m.areLinked(s1, s2));
 	}
 	
 	@Test
 	@DisplayName("Pas de connexion directe entre deux stations")
 	void areConnected2Test() {	
 		m.addRail(s1,s3 , 5, false);
-		assertFalse(m.areConnected(s1, s2));
+		assertFalse(m.areLinked(s1, s2));
 	}
 	
 	
 	@Test
-	@DisplayName("areLinked avec lien direct")
+	@DisplayName("areConnected avec lien direct")
 	void areLinkedTest() {
 		m.addRail(s1,s2 , 5, false);
-		assertTrue(m.areLinked(s1, s2));
+		assertTrue(m.areConnected(s1, s2));
 	}
 	
 	@Test
-	@DisplayName("areLinked avec lien distancé")
+	@DisplayName("areConnected avec lien distancé")
 	void areLinked2Test() {
 		m.addRail(s1,s2 , 5, false);
 		m.addRail(s2, s3, 1, false);
