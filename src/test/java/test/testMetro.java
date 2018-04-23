@@ -112,7 +112,7 @@ class testMetro {
 	void areLinked2Test() {
 		m.addRail(s1,s2 , 5, false);
 		m.addRail(s2, s3, 1, false);
-		assertTrue(m.areLinked(s1, s3));
+		assertTrue(m.areConnected(s1, s3));
 	}
 	
 	@Test

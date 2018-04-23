@@ -78,7 +78,15 @@ public class Metro implements Serializable{
 	
 	//Vérifie s'il existe un chemin quelconque entre les deux stations
 	public boolean areLinked(Station s1, Station s2) {
-		return false;
+		boolean res = false;
+		for(Rail rail : this.rails) {
+			if (rail.isLinkedTo(s1) && rail.isLinkedTo(s2)) {
+				res = true;
+				break;
+			}
+		}
+		return res;
+
 	}
 	
 	public void delRail(Station s1, Station s2) {
