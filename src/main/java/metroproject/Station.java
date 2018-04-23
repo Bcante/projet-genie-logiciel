@@ -7,10 +7,17 @@ public class Station implements Serializable{
 	
 	String nomStation;
 	ArrayList<Rail> rails;
-	
-	public Station(String nomStation) {
-		this.nomStation = nomStation;
-		this.rails = new ArrayList<Rail>();
+	private int x,y;
+
+    public Station(int x, int y, String nomStation) {
+        this.x = x;
+        this.y = y;
+        this.nomStation = nomStation;
+        this.rails = new ArrayList<Rail>();
+    }
+
+    public Station(String nomStation) {
+		this(-1,-1,nomStation);
 	}
 
 	public Station(ArrayList<Rail> rails) {
