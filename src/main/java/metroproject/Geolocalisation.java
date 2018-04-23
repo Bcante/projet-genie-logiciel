@@ -23,12 +23,14 @@ public class Geolocalisation {
         {
             Station stationTmp = entry.getValue();
 
-            dest = new Point(stationTmp.getX(),stationTmp.getY());
-            int distanceTmp = (int) depart.distanceSq(dest);
+            if (stationTmp.getX() != -1 && stationTmp.getY() != -1) {
+                dest = new Point(stationTmp.getX(), stationTmp.getY());
+                int distanceTmp = (int) depart.distanceSq(dest);
 
-            if (laPlusProche == null || distance > distanceTmp) {
-                distance = distanceTmp;
-                laPlusProche = stationTmp;
+                if (laPlusProche == null || distance > distanceTmp) {
+                    distance = distanceTmp;
+                    laPlusProche = stationTmp;
+                }
             }
         }
 

@@ -9,6 +9,7 @@ public class Metro implements Serializable{
 
 	private HashMap<String,Station> stations;
 	private ArrayList<Rail> rails;
+	private Geolocalisation geo;
 	
 	public Metro() {
 		this(new HashMap<String,Station>(),new ArrayList<Rail>());
@@ -18,6 +19,7 @@ public class Metro implements Serializable{
 	public Metro(HashMap<String,Station> stations, ArrayList<Rail> rails) {
 		this.stations = stations;
 		this.rails = rails;
+		this.geo = new Geolocalisation(stations);
 	}
 
 	public HashMap<String,Station> getStations() {
@@ -114,6 +116,16 @@ public class Metro implements Serializable{
 		}else {
 			this.stations.remove(station.getNomStation());
 		}
+	}
+
+	public Geolocalisation getGeo() {
+		return geo;
+	}
+
+	public String trouveStationPlusProche(Utilisateur u) {
+
+		Station res = geo.trouveStationProche(u);
+		return (res == null ? null : res.getNomStation());
 	}
 	
 	

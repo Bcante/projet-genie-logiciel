@@ -2,7 +2,6 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import metroproject.Geolocalisation;
 import metroproject.Metro;
 import metroproject.Station;
 import metroproject.Utilisateur;
@@ -13,9 +12,13 @@ import java.util.HashMap;
 
 public class testGeolocalisation {
 
-    HashMap<String,Station> stations = new HashMap<>();
-    Geolocalisation g = new Geolocalisation(stations);
 
+    HashMap<String,Station> simpleStations = new HashMap<>();
+    Metro simpleM = new Metro(simpleStations,null);
+
+    /* Metro pour cas particulier*/
+    HashMap<String,Station> penibleStation = new HashMap<>();
+    Metro penibleM = new Metro(penibleStation, null);
 
     @BeforeEach
     public void constructeur(){
@@ -25,25 +28,39 @@ public class testGeolocalisation {
         Station s4 = new Station(20,20,"20 20");
         Station s5 = new Station(10,10,"10 10");
 
-        stations.put("5 5",s1);
-        stations.put("5 100",s2);
-        stations.put("-1 -1",s3);
-        stations.put("20 20",s4);
-        stations.put("10 10",s5);
+        simpleStations.put("5 5",s1);
+        simpleStations.put("5 100",s2);
+        simpleStations.put("-1 -1",s3);
+        simpleStations.put("20 20",s4);
+        simpleStations.put("10 10",s5);
     }
 
     @Test
     public void memeEndroit() {
         Utilisateur u = new Utilisateur(5,5,"Bob");
-        String res = g.trouveStationProche(u);
+        String res = simpleM.trouveStationPlusProche(u);
         assertEquals(res,"5 5");
     }
 
     @Test
     public void casSimple() {
         Utilisateur u = new Utilisateur(21,17,"Bob");
-        String res = g.trouveStationProche(u);
+        String res = simpleM.trouveStationPlusProche(u);
         assertEquals(res,"20 20");
+    }
+
+    @Test
+    public void presDuMauvais() {
+        Utilisateur u = new Utilisateur(0,0,"Bob");
+        String res = simpleM.trouveStationPlusProche(u);
+        assertEquals(res,"5 5");
+    }
+
+    @Test
+    public void pasDeChoixPossible() {
+        Utilisateur u = new Utilisateur(0,0,"Bob");
+        String res = penibleM.trouveStationPlusProche(u);
+        assertNull(res);
     }
 
 }
