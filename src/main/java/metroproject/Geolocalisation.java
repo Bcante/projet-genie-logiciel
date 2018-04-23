@@ -13,7 +13,7 @@ public class Geolocalisation {
         this.stations = stations;
     }
 
-    public String trouveStationProche(Utilisateur u) {
+    public Station trouveStationProche(Utilisateur u) {
         Point depart = new Point(u.getX(),u.getY());
         Point dest = null;
         Station laPlusProche = null;
@@ -32,7 +32,6 @@ public class Geolocalisation {
             }
         }
 
-        String res = laPlusProche.getNomStation();
-        return res;
+        return laPlusProche;
     }
 }
