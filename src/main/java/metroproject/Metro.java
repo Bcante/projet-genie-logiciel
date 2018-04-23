@@ -70,18 +70,24 @@ public class Metro implements Serializable{
 				s1.removeRailToStation(rail);
 				s2.removeRailToStation(rail);
 				this.rails.remove(rail);
+				break;
 			}
 		}
 	}
 	
 	public void delStation(Station station) {
-		for(Rail rail : this.rails) {
-			if(rail.isLinkedTo(station)) {
-				rail.getArrivee().removeRailToStation(rail);
-				rail.getDepart().removeRailToStation(rail);
-				this.stations.remove(station);
-				this.rails.remove(rail);
+		if(this.rails.size() > 0) {
+			for(Rail rail : this.rails) {
+				if(rail.isLinkedTo(station)) {
+					rail.getArrivee().removeRailToStation(rail);
+					rail.getDepart().removeRailToStation(rail);
+					this.stations.remove(station.getNomStation());
+					this.rails.remove(rail);
+					break;
+				}
 			}
+		}else {
+			this.stations.remove(station.getNomStation());
 		}
 	}
 
