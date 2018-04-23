@@ -4,10 +4,6 @@ public class Utilisateur {
     private int x,y;
     private String nom;
 
-    public Utilisateur(String nom) {
-        this(-1,-1,nom);
-    }
-
     public Utilisateur(int x, int y, String nom) {
         this.x = x;
         this.y = y;
