@@ -3,6 +3,7 @@ package metroproject;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+@SuppressWarnings("serial")
 public class Station implements Serializable{
 	
 	String nomStation;

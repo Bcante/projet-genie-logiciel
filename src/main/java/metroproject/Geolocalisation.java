@@ -1,15 +1,13 @@
 package metroproject;
 
 import java.awt.*;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Map;
 
 public class Geolocalisation {
 
     private Map<String,Station> stations;
 
-    public Geolocalisation(Map stations) {
+    public Geolocalisation(Map<String,Station> stations) {
         this.stations = stations;
     }
 

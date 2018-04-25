@@ -2,6 +2,7 @@ package metroproject;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class Rail implements Serializable{
 	Station depart, arrivee;
 	int duree;

@@ -5,10 +5,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+@SuppressWarnings("serial")
 public class Metro implements Serializable{
 
 	private String nomVille;
 	private HashMap<String,Station> stations;
+	private HashMap<String,Ligne> lignes;
 	private ArrayList<Rail> rails;
 	private Geolocalisation geo;
 	
@@ -32,6 +34,16 @@ public class Metro implements Serializable{
 	
 	public String getNomVille() {
 		return nomVille;
+	}
+
+
+	public HashMap<String, Ligne> getLignes() {
+		return lignes;
+	}
+
+
+	public void setLignes(HashMap<String, Ligne> lignes) {
+		this.lignes = lignes;
 	}
 
 
