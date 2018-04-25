@@ -15,7 +15,7 @@ import utilitaires.GestionnaireSauvegarde;
 
 class testMetro {
 	private static Metro grandMetro;
-	Metro m = new Metro();
+	Metro m = new Metro("TestMetro");
 	Station s1,s2,s3;
 	
 	@BeforeEach
@@ -30,7 +30,7 @@ class testMetro {
 	
 	@BeforeAll
 	static void beforeAll() {
-        grandMetro=new Metro();
+        grandMetro=new Metro("France");
         grandMetro.addStation("Paris");
         grandMetro.addStation("Nancy");
         grandMetro.addStation("Metz");
