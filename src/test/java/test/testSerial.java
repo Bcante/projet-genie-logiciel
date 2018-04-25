@@ -12,7 +12,7 @@ class testSerial {
 
 	@Test
 	void serializationDeserializationTest() {
-		Metro grandMetro = new Metro();
+		Metro grandMetro = new Metro("Europe");
 		grandMetro.addStation("Paris");
 		grandMetro.addStation("Berlin");
 

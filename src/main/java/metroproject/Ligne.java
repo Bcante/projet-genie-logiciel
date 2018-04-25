@@ -1,15 +1,19 @@
 package metroproject;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 
 public class Ligne {
 	private String numero;
-	private LinkedHashSet<Station> stationsLigne;
+	private LinkedHashSet<Station> stationsLigneAllez;
+	private LinkedHashSet<Station> stationsLigneRetour;
 	
-	public Ligne(String numero) {
+	public Ligne(String numero, LinkedHashSet<Station> ligneAllez) {
 		this.numero = numero;
-		this.stationsLigne = new LinkedHashSet<Station>();
+		this.stationsLigneAllez = ligneAllez;
+		this.stationsLigneRetour = this.reverseListStation(ligneAllez);
 	}
 	
 	public String getNumero() {
@@ -19,21 +23,43 @@ public class Ligne {
 		this.numero = numero;
 	}
 	public LinkedHashSet<Station> getStationsLigne() {
-		return stationsLigne;
+		return stationsLigneAllez;
 	}
 	public void setStationsLigne(LinkedHashSet<Station> stationsLigne) {
-		this.stationsLigne = stationsLigne;
+		this.stationsLigneAllez = stationsLigne;
 	}
 	
+	public LinkedHashSet<Station> getStationsLigneAllez() {
+		return stationsLigneAllez;
+	}
+
+	public void setStationsLigneAllez(LinkedHashSet<Station> stationsLigneAllez) {
+		this.stationsLigneAllez = stationsLigneAllez;
+	}
+
+	public LinkedHashSet<Station> getStationsLigneRetour() {
+		return stationsLigneRetour;
+	}
+
+	public void setStationsLigneRetour(LinkedHashSet<Station> stationsLigneRetour) {
+		this.stationsLigneRetour = stationsLigneRetour;
+	}
+
 	/*retourne la station de départ de la ligne*/
-	public Station getDepart() {
-		Iterator<Station> statIt = stationsLigne.iterator();
+	public Station getDepartAllez() {
+		Iterator<Station> statIt = stationsLigneAllez.iterator();
 		return statIt.next();
 	}
 	
+	public LinkedHashSet<Station> reverseListStation(LinkedHashSet<Station> listToReverse) {
+		ArrayList<Station> listTemp = new ArrayList<Station>(listToReverse);
+		Collections.sort(listTemp, Collections.reverseOrder());
+		return new LinkedHashSet<Station>(listTemp);
+	}
+	
 	/*retourne le terminus*/
-	public Station getTerminus() {
-		Iterator<Station> statIt = stationsLigne.iterator();
+	public Station getTerminusAllez() {
+		Iterator<Station> statIt = stationsLigneAllez.iterator();
 		Station terminus=statIt.next();
 		while(statIt.hasNext()) {
 			terminus=statIt.next();
@@ -41,5 +67,19 @@ public class Ligne {
 		return terminus;
 	}
 	
-
+	/*retourne la station de départ de la ligne*/
+	public Station getDepartRetour() {
+		Iterator<Station> statIt = stationsLigneRetour.iterator();
+		return statIt.next();
+	}
+	
+	/*retourne le terminus*/
+	public Station getTerminusRetour() {
+		Iterator<Station> statIt = stationsLigneRetour.iterator();
+		Station terminus=statIt.next();
+		while(statIt.hasNext()) {
+			terminus=statIt.next();
+        }
+		return terminus;
+	}
 }
