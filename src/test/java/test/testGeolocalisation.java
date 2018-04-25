@@ -14,11 +14,11 @@ public class testGeolocalisation {
 
 
     HashMap<String,Station> simpleStations = new HashMap<>();
-    Metro simpleM = new Metro(simpleStations,null);
+    Metro simpleM = new Metro(simpleStations,null,null);
 
     /* Metro pour cas particulier*/
     HashMap<String,Station> penibleStation = new HashMap<>();
-    Metro penibleM = new Metro(penibleStation, null);
+    Metro penibleM = new Metro(penibleStation, null,null);
 
     @BeforeEach
     public void constructeur(){
