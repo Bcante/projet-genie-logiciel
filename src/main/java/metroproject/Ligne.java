@@ -10,17 +10,17 @@ import java.util.LinkedHashSet;
 @SuppressWarnings("serial")
 public class Ligne implements Serializable{
 	private String numero;
-	private LinkedHashSet<Station> stationsLigneAllez;
+	private LinkedHashSet<Station> stationsLigneAller;
 	private LinkedHashSet<Station> stationsLigneRetour;
 	
 	public Ligne(String numero) {
 		this(numero, new LinkedHashSet<Station>());
 	}
 	
-	public Ligne(String numero, LinkedHashSet<Station> ligneAllez) {
+	public Ligne(String numero, LinkedHashSet<Station> ligneAller) {
 		this.numero = numero;
-		this.stationsLigneAllez = ligneAllez;
-		this.stationsLigneRetour = this.reverseListStation(ligneAllez);
+		this.stationsLigneAller = ligneAller;
+		this.stationsLigneRetour = this.reverseListStation(ligneAller);
 	}
 	
 	public String getNumero() {
@@ -30,19 +30,19 @@ public class Ligne implements Serializable{
 		this.numero = numero;
 	}
 	public LinkedHashSet<Station> getStationsLigne() {
-		return stationsLigneAllez;
+		return stationsLigneAller;
 	}
 	public void setStationsLigne(LinkedHashSet<Station> stationsLigne) {
-		this.stationsLigneAllez = stationsLigne;
+		this.stationsLigneAller = stationsLigne;
 	}
 	
-	public LinkedHashSet<Station> getStationsLigneAllez() {
-		return stationsLigneAllez;
+	public LinkedHashSet<Station> getStationsLigneAller() {
+		return stationsLigneAller;
 	}
 
-	public void setStationsLigneAllez(LinkedHashSet<Station> stationsLigneAllez) {
-		this.stationsLigneAllez = stationsLigneAllez;
-		this.setStationsLigneRetour(this.reverseListStation(stationsLigneAllez));
+	public void setStationsLigneAller(LinkedHashSet<Station> stationsLigneAller) {
+		this.stationsLigneAller = stationsLigneAller;
+		this.setStationsLigneRetour(this.reverseListStation(stationsLigneAller));
 	}
 
 	public LinkedHashSet<Station> getStationsLigneRetour() {
@@ -54,8 +54,8 @@ public class Ligne implements Serializable{
 	}
 
 	/*retourne la station de départ de la ligne*/
-	public Station getDepartAllez() {
-		Iterator<Station> statIt = stationsLigneAllez.iterator();
+	public Station getDepartAller() {
+		Iterator<Station> statIt = stationsLigneAller.iterator();
 		return statIt.next();
 	}
 	
@@ -66,8 +66,8 @@ public class Ligne implements Serializable{
 	}
 	
 	/*retourne le terminus*/
-	public Station getTerminusAllez() {
-		Iterator<Station> statIt = stationsLigneAllez.iterator();
+	public Station getTerminusAller() {
+		Iterator<Station> statIt = stationsLigneAller.iterator();
 		Station terminus=statIt.next();
 		while(statIt.hasNext()) {
 			terminus=statIt.next();

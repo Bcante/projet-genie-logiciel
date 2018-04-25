@@ -152,11 +152,11 @@ public class Plan {
 		listeLigne.put("5", new Ligne("5"));
 		
 		// Affectation des stations aux lignes
-		listeLigne.get("1").setStationsLigneAllez(listL1);
-		listeLigne.get("2").setStationsLigneAllez(listL2);
-		listeLigne.get("3").setStationsLigneAllez(listL3);
-		listeLigne.get("4").setStationsLigneAllez(listL4);
-		listeLigne.get("5").setStationsLigneAllez(listL5);
+		listeLigne.get("1").setStationsLigneAller(listL1);
+		listeLigne.get("2").setStationsLigneAller(listL2);
+		listeLigne.get("3").setStationsLigneAller(listL3);
+		listeLigne.get("4").setStationsLigneAller(listL4);
+		listeLigne.get("5").setStationsLigneAller(listL5);
 		
 		metroParis.setStations(listeStation);
 		metroParis.setRails(listeRail);
