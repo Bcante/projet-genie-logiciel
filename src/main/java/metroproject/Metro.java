@@ -7,16 +7,18 @@ import java.util.HashMap;
 
 public class Metro implements Serializable{
 
+	private String nomVille;
 	private HashMap<String,Station> stations;
 	private ArrayList<Rail> rails;
 	private Geolocalisation geo;
 	
-	public Metro() {
-		this(new HashMap<String,Station>(),new ArrayList<Rail>());
+	public Metro(String nomVille) {
+		this(nomVille,new HashMap<String,Station>(),new ArrayList<Rail>());
 	}
 
 	
-	public Metro(HashMap<String,Station> stations, ArrayList<Rail> rails) {
+	public Metro(String nomVille,HashMap<String,Station> stations, ArrayList<Rail> rails) {
+		this.nomVille = nomVille;
 		this.stations = stations;
 		this.rails = rails;
 		this.geo = new Geolocalisation(stations);
@@ -26,6 +28,23 @@ public class Metro implements Serializable{
 		return stations;
 	}
 	
+	
+	
+	public String getNomVille() {
+		return nomVille;
+	}
+
+
+	public void setNomVille(String nomVille) {
+		this.nomVille = nomVille;
+	}
+
+
+	public void setGeo(Geolocalisation geo) {
+		this.geo = geo;
+	}
+
+
 	public Station getStation(String nomStation) {
 		return this.stations.get(nomStation);
 	}
