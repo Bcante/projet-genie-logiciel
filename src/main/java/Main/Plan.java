@@ -50,24 +50,28 @@ public class Plan {
 		listeStation.put("Couronnes", new Station("Couronnes"));
 
 		// Ligne 5
-		listeStation.put("BelleVille", new Station("BelleVille"));
+		listeStation.put("Belleville", new Station("Belleville"));
 		listeStation.put("Blanche", new Station("Blanche"));
 		listeStation.put("Gallieni", new Station("Gallieni"));
 		listeStation.put("Gambetta", new Station("Gambetta"));
 
 		// LigneCommune
-		listeStation.put("CharlesDeGaule", new Station("CharlesDeGaule"));// 1 et 2 et 4
+		listeStation.put("CharlesDeGaulle", new Station("CharlesDeGaulle"));// 1 et 2 et 4
 		listeStation.put("Concorde", new Station("Concorde"));// 1,3,5
 		listeStation.put("Esplanade", new Station("Esplanade"));// 2,4
 		listeStation.put("FranklinDRoosvlet", new Station("FranklinDRoosvlet"));// 2,3
 		listeStation.put("ColonnelFabien", new Station("ColonnelFabien"));// 2,3
 		listeStation.put("Courcelles", new Station("Courcelles"));// 4,5
 		listeStation.put("Jaures", new Station("Jaures"));// 2,5
-
+		
+		metroParis.setStations(listeStation);
+		
 		// Rails L1
+
+		
 		listeRail.add(new Rail(listeStation.get("Argentine"), listeStation.get("Bastille"), 2, false));
-		listeRail.add(new Rail(listeStation.get("Bastille"), listeStation.get("CharlesDeGaule"), 4,false));
-		listeRail.add(new Rail(listeStation.get("CharlesDeGaule"), listeStation.get("Berault"), 4,false));
+		listeRail.add(new Rail(listeStation.get("Bastille"), listeStation.get("CharlesDeGaulle"), 4,false));
+		listeRail.add(new Rail(listeStation.get("CharlesDeGaulle"), listeStation.get("Berault"), 4,false));
 		listeRail.add(new Rail(listeStation.get("Berault"), listeStation.get("Concorde"), 2, false));
 		listeRail.add(new Rail(listeStation.get("Concorde"), listeStation.get("ChampsElysee"), 1, false));
 
@@ -115,21 +119,20 @@ public class Plan {
 		listL3.add(listeStation.get("Europe"));
 		
 		// Rails L4
-		listeRail.add(new Rail(listeStation.get("ChateauDeVincennes"), listeStation.get("CharlesDeGaule"), 2,false));
+		listeRail.add(new Rail(listeStation.get("ChateauDeVincennes"), listeStation.get("CharlesDeGaulle"), 2,false));
 		listeRail.add(new Rail(listeStation.get("CharlesDeGaulle"), listeStation.get("Chatelet"), 3,false));
 		listeRail.add(new Rail(listeStation.get("Chatelet"), listeStation.get("Esplanade"), 2,false));
 		listeRail.add(new Rail(listeStation.get("Esplanade"), listeStation.get("Courcelles"), 3,false));
 		listeRail.add(new Rail(listeStation.get("Courcelles"), listeStation.get("Couronnes"), 2,false));
 		
 		listL4.add(listeStation.get("ChateauDeVincennes"));
-		listL4.add(listeStation.get("CharlesDeGaule"));
+		listL4.add(listeStation.get("CharlesDeGaulle"));
 		listL4.add(listeStation.get("Chatelet"));
 		listL4.add(listeStation.get("Esplanade"));
 		listL4.add(listeStation.get("Courcelles"));
 		listL4.add(listeStation.get("Couronnes"));
 		
 		// Rails L5
-		
 		listeRail.add(new Rail(listeStation.get("Belleville"), listeStation.get("Blanche"), 2,false));
 		listeRail.add(new Rail(listeStation.get("Blanche"), listeStation.get("Concorde"), 3,false));
 		listeRail.add(new Rail(listeStation.get("Concorde"), listeStation.get("Courcelles"), 2,false));
@@ -158,7 +161,7 @@ public class Plan {
 		listeLigne.get("4").setStationsLigneAller(listL4);
 		listeLigne.get("5").setStationsLigneAller(listL5);
 		
-		metroParis.setStations(listeStation);
+		//metroParis.setStations(listeStation);
 		metroParis.setRails(listeRail);
 		metroParis.setLignes(listeLigne);
 		
