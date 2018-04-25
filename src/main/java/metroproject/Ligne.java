@@ -7,6 +7,10 @@ public class Ligne {
 	private String numero;
 	private LinkedHashSet<Station> stationsLigne;
 	
+	public Ligne(String numero) {
+		this.numero = numero;
+		this.stationsLigne = new LinkedHashSet<Station>();
+	}
 	
 	public String getNumero() {
 		return numero;
