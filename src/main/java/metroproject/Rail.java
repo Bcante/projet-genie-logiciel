@@ -12,6 +12,10 @@ public class Rail implements Serializable{
 		this.arrivee = arrivee;
 		this.duree = duree;
 		this.incident = incident;
+		
+
+		this.depart.addRailtoStation(this);
+		this.arrivee.addRailtoStation(this);
 	}
 	
 	public Station getDepart() {
