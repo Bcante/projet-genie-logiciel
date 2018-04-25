@@ -4,21 +4,27 @@ package metroproject;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.Map.Entry;
+import java.util.Set;
 
 public class Metro implements Serializable{
 
 	private HashMap<String,Station> stations;
 	private ArrayList<Rail> rails;
 	private Geolocalisation geo;
+	private HashMap<String, Ligne> lignes;
 	
 	public Metro() {
-		this(new HashMap<String,Station>(),new ArrayList<Rail>());
+		this(new HashMap<String,Station>(),new ArrayList<Rail>(), new HashMap <String,Ligne>());
 	}
 
 	
-	public Metro(HashMap<String,Station> stations, ArrayList<Rail> rails) {
+	public Metro(HashMap<String,Station> stations, ArrayList<Rail> rails, HashMap <String,Ligne> lignes) {
 		this.stations = stations;
 		this.rails = rails;
+		this.lignes=lignes;
 		this.geo = new Geolocalisation(stations);
 	}
 
@@ -42,6 +48,16 @@ public class Metro implements Serializable{
 		this.rails = rails;
 	}
 	
+	public HashMap<String, Ligne> getLignes() {
+		return lignes;
+	}
+
+
+	public void setLignes(HashMap<String, Ligne> lignes) {
+		this.lignes = lignes;
+	}
+
+
 	public void addRail(Station start, Station destination, int duree, boolean incident) {
 		Rail railToAdd = new Rail(start,destination, duree,incident);
 		this.rails.add(railToAdd);
@@ -53,6 +69,51 @@ public class Metro implements Serializable{
 		Station stationToAdd = new Station(nom);
 		this.stations.put(nom,stationToAdd);
 	}
+	
+	private void addStation(Station s) {
+		this.stations.put(s.getNomStation(), s);
+	}
+	
+	/*ajoute une ligne à un station déjà existante et la met à jour dans les 
+	 * éventuelles lignes existantes*/
+	private Station addLigneToStation(Station s, String numero){
+		//modifier la station dans le metro
+		Station sExistante=stations.get(s.getNomStation());
+		sExistante.addLigne(numero);
+		Set<Entry<String, Ligne>> setLignes = lignes.entrySet();
+		Iterator<Entry<String, Ligne>> lignesIt = setLignes.iterator();
+		Entry<String, Ligne> ligne = lignesIt.next();
+		/* vérification de toutes les lignes */
+		while(lignesIt.hasNext()) {
+		    Ligne ligneObj = ligne.getValue();
+		    if (ligneObj.hasStation(ligne.getKey())){
+		    	Station statFromLigne=ligneObj.getStation(s.getNomStation());
+		    	statFromLigne.addLigne(numero);
+		    }
+		    ligne = lignesIt.next();
+		}
+		return sExistante; /* retour pour la fonction addLigne
+		pour que la station soit directement ajoutée à la nouvelle ligne avec les autres lignes qu'elle dessert*/
+	}
+	
+	public void addLigne(ArrayList<String> ligne, String numero) {
+		LinkedHashSet<Station> stationsLigne=new LinkedHashSet<Station>();
+		for (String l: ligne) {
+			Station s=new Station(l);
+			Station test=stations.get(l);
+			//si la station existe déjà, on lui ajoute un numéro de station supplémentaire
+			if (test != null) {
+				s=addLigneToStation(s, numero);
+			}
+			else {
+				addStation(s);
+			}
+			stationsLigne.add(s);
+		}
+		Ligne ligneF=new Ligne(numero, stationsLigne);
+		this.lignes.put(numero,ligneF);
+	}
+	
 	
 	//Vérifie s'il existe un lien direct (un rail) entre les deux stations
 	public boolean areConnected(Station s1, Station s2) {

@@ -5,8 +5,10 @@ import java.util.ArrayList;
 
 public class Station implements Serializable{
 	
-	String nomStation;
-	ArrayList<Rail> rails;
+	private String nomStation;
+	private ArrayList<Rail> rails;
+	private ArrayList<String> lignes;
+	
 	private int x,y;
 
     public Station(int x, int y, String nomStation) {
@@ -14,6 +16,18 @@ public class Station implements Serializable{
         this.y = y;
         this.nomStation = nomStation;
         this.rails = new ArrayList<Rail>();
+    }
+    
+    public Station(String nomStation, ArrayList<String> lignes) {
+    	this.nomStation = nomStation;
+        this.rails = new ArrayList<Rail>();
+        this.lignes=lignes;
+    }
+    
+    public Station(String nomStation, ArrayList<String> lignes, ArrayList<Rail> rails) {
+    	this.nomStation = nomStation;
+        this.rails = rails;
+        this.lignes = lignes;
     }
 
     public Station(String nomStation) {
@@ -49,6 +63,18 @@ public class Station implements Serializable{
 		this.rails.remove(rail);
 	}
 	
+	public ArrayList<String> getLignes() {
+		return lignes;
+	}
+
+	public void setLignes(ArrayList<String> lignes) {
+		this.lignes = lignes;
+	}
+	
+	public void addLigne(String ligne) {
+		lignes.add(ligne);
+	}
+
 	//retournes les stations directements liées à la station
 	public ArrayList<Station> getConnections(){
 		ArrayList<Station> listResult = new ArrayList<Station>();
@@ -66,5 +92,10 @@ public class Station implements Serializable{
 
     public int getY() {
         return y;
+    }
+    
+    public boolean equals(Station s) {
+    	
+    	return false;
     }
 }
