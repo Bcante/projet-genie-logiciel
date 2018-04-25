@@ -1,11 +1,14 @@
 package metroproject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 
-public class Ligne {
+
+@SuppressWarnings("serial")
+public class Ligne implements Serializable{
 	private String numero;
 	private LinkedHashSet<Station> stationsLigneAllez;
 	private LinkedHashSet<Station> stationsLigneRetour;
