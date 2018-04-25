@@ -10,6 +10,10 @@ public class Ligne {
 	private LinkedHashSet<Station> stationsLigneAllez;
 	private LinkedHashSet<Station> stationsLigneRetour;
 	
+	public Ligne(String numero) {
+		this(numero, new LinkedHashSet<Station>());
+	}
+	
 	public Ligne(String numero, LinkedHashSet<Station> ligneAllez) {
 		this.numero = numero;
 		this.stationsLigneAllez = ligneAllez;
@@ -35,6 +39,7 @@ public class Ligne {
 
 	public void setStationsLigneAllez(LinkedHashSet<Station> stationsLigneAllez) {
 		this.stationsLigneAllez = stationsLigneAllez;
+		this.setStationsLigneRetour(this.reverseListStation(stationsLigneAllez));
 	}
 
 	public LinkedHashSet<Station> getStationsLigneRetour() {
@@ -53,7 +58,7 @@ public class Ligne {
 	
 	public LinkedHashSet<Station> reverseListStation(LinkedHashSet<Station> listToReverse) {
 		ArrayList<Station> listTemp = new ArrayList<Station>(listToReverse);
-		Collections.sort(listTemp, Collections.reverseOrder());
+		Collections.reverse((listTemp));
 		return new LinkedHashSet<Station>(listTemp);
 	}
 	
