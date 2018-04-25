@@ -33,14 +33,14 @@ class testLigne {
 		listeStation.add(s3);
 		listeStation.add(s4);
 		
-		ligneTest.setStationsLigneAllez(listeStation);
+		ligneTest.setStationsLigneAller(listeStation);
 	}
 
 	@Test
 	@DisplayName("ListeRetour est inverse a listeAllez")
 	void testReverse() {
 		int i = ligneTest.getStationsLigneRetour().size()-1;
-		Iterator<Station> iterator = ligneTest.getStationsLigneAllez().iterator();
+		Iterator<Station> iterator = ligneTest.getStationsLigneAller().iterator();
 		ArrayList<Station> list = new ArrayList<Station>(ligneTest.getStationsLigneRetour());
 		while(iterator.hasNext()) {
 			assertEquals(iterator.next(),list.get(i));
@@ -51,13 +51,13 @@ class testLigne {
 	@Test
 	@DisplayName("Le départ allez est s1")
 	void testGetDepartAllez() {
-		assertEquals(s1,ligneTest.getDepartAllez());
+		assertEquals(s1,ligneTest.getDepartAller());
 	}
 
 	@Test
 	@DisplayName("L'arrivée allez est s4")
 	void testGetTerminusAllez() {
-		assertEquals(s4,ligneTest.getTerminusAllez());
+		assertEquals(s4,ligneTest.getTerminusAller());
 	}
 	
 	@Test
