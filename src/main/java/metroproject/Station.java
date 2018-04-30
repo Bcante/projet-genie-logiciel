@@ -65,6 +65,17 @@ public class Station implements Serializable{
 		}
 		return listResult;
 	}
+	
+	/* suppose que la connection existe*/
+	public Rail getConnectionTo(Station s) {
+		Rail connectionTo=null;
+		for (Rail r: rails) {
+			if (r.getArrivee().equals(s) || r.getDepart().equals(s)) {
+				connectionTo=r;
+			}
+		}
+		return connectionTo;
+	}
 
     public int getX() {
         return x;
