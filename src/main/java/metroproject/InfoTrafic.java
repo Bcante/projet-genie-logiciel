@@ -18,15 +18,18 @@ public class InfoTrafic implements Serializable{
     }
 
     /* Pour une ligne donnée, on renvoie tous les rails qui ont un accident */
-    public LinkedHashSet<Rail> problemeSurLigne(LinkedHashSet<Station> ligne) {
+    public LinkedHashSet<Rail> problemeSurLigne(Ligne ligne) {
         LinkedHashSet problemes = new LinkedHashSet<Rail>();
-        Iterator<Station> it = ligne.iterator();
+        Iterator<Station> it = ligne.getStationsLigneAller().iterator();
+
+        if (ligne.getStationsLigneAller().size() <= 1){ // il faut au moins 2 stations pour qu'il y a un problème de rail
+            return problemes;
+        }
 
         Station depart = it.next();
         Station dest = it.next();
-
         if (depart == null || dest == null) {
-            throw new IllegalStateException(); // Ligne avec 1 seule station = problème
+            return problemes; // Ligne avec 1 seule station = problème
         }
 
         while (it.hasNext()) {
