@@ -1,9 +1,10 @@
 package metroproject;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.Map;
 
-public class Geolocalisation {
+public class Geolocalisation implements Serializable {
 
     private Map<String,Station> stations;
 
