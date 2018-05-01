@@ -16,6 +16,7 @@ public class Metro implements Serializable{
 	private HashMap<String,Ligne> lignes;
 	private ArrayList<Rail> rails;
 	private Geolocalisation geo;
+	private InfoTrafic infoTrafic;
 	
 	public Metro(String nomVille) {
 		this(nomVille,new HashMap<String,Station>(),new ArrayList<Rail>());
@@ -27,6 +28,7 @@ public class Metro implements Serializable{
 		this.stations = stations;
 		this.rails = rails;
 		this.geo = new Geolocalisation(stations);
+		this.infoTrafic = new InfoTrafic(stations);
 	}
 
 	public HashMap<String,Station> getStations() {
@@ -222,6 +224,10 @@ public class Metro implements Serializable{
 
 	public Geolocalisation getGeo() {
 		return geo;
+	}
+
+	public InfoTrafic getInfoTrafic() {
+		return infoTrafic;
 	}
 
 	public String trouveStationPlusProche(Utilisateur u) {
