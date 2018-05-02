@@ -9,10 +9,10 @@ import java.util.LinkedHashSet;
 Classe contenant les méthodes directement appelables par un utilisateur
  */
 public class IHM {
-    Plan p;
-    Metro m;
-    InfoTrafic info;
-    Geolocalisation geo;
+    private Plan p;
+    private Metro m;
+    private InfoTrafic info;
+    private Geolocalisation geo;
     public IHM() {
         p=new Plan();
         m=p.creerMetroParis();
@@ -98,5 +98,19 @@ public class IHM {
 
     }
 
+    public Plan getP() {
+        return p;
+    }
 
+    public Metro getM() {
+        return m;
+    }
+
+    public InfoTrafic getInfo() {
+        return info;
+    }
+
+    public Geolocalisation getGeo() {
+        return geo;
+    }
 }
