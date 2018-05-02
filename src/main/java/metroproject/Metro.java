@@ -35,8 +35,6 @@ public class Metro implements Serializable{
 		return stations;
 	}
 	
-	
-	
 	public String getNomVille() {
 		return nomVille;
 	}
@@ -155,20 +153,4 @@ public class Metro implements Serializable{
 			this.stations.remove(station.getNomStation());
 		}
 	}
-
-	public Geolocalisation getGeo() {
-		return geo;
-	}
-
-	public InfoTrafic getInfoTrafic() {
-		return infoTrafic;
-	}
-
-	public String trouveStationPlusProche(Utilisateur u) {
-
-		Station res = geo.trouveStationProche(u);
-		return (res == null ? null : res.getNomStation());
-	}
-	
-	
 }

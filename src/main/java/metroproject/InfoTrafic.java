@@ -53,4 +53,7 @@ public class InfoTrafic implements Serializable{
         return problemes;
     }
 
+    public Map<String, Station> getStations() {
+        return stations;
+    }
 }
