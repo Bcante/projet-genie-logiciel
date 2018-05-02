@@ -20,7 +20,7 @@ public class testRechercheChemin {
 	
 	@BeforeAll
 	static void beforeAll() {
-		m=p.creerMetroParis();
+		m=p.createParisMetro();
 	}
 	
 	@Test

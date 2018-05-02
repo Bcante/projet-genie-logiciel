@@ -3,11 +3,9 @@ package test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import metroproject.Geolocalisation;
-import metroproject.Metro;
 import metroproject.Station;
 import metroproject.Utilisateur;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -41,28 +39,28 @@ public class testGeolocalisation {
     @Test
     public void memeEndroit() {
         Utilisateur u = new Utilisateur(5,5,"Bob");
-        String res = g.trouveStationProche(u).getNomStation();
+        String res = g.findCloseStation(u).getNomStation();
         assertEquals(res,"5 5");
     }
 
     @Test
     public void casSimple() {
         Utilisateur u = new Utilisateur(21,17,"Bob");
-        String res = g.trouveStationProche(u).getNomStation();
+        String res = g.findCloseStation(u).getNomStation();
         assertEquals(res,"20 20");
     }
 
     @Test
     public void presDuMauvais() {
         Utilisateur u = new Utilisateur(0,0,"Bob");
-        String res = g.trouveStationProche(u).getNomStation();
+        String res = g.findCloseStation(u).getNomStation();
         assertEquals(res,"5 5");
     }
 
     @Test
     public void pasDeChoixPossible() {
         Utilisateur u = new Utilisateur(0,0,"Bob");
-        assertNull(g2.trouveStationProche(u));
+        assertNull(g2.findCloseStation(u));
     }
 
 }

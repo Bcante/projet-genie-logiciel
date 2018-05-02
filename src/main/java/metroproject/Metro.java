@@ -4,9 +4,6 @@ package metroproject;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-
-import javafx.util.Pair;
 
 @SuppressWarnings("serial")
 public class Metro implements Serializable{
@@ -30,6 +27,21 @@ public class Metro implements Serializable{
 		this.geo = new Geolocalisation(stations);
 		this.infoTrafic = new InfoTrafic(stations);
 	}
+	
+	public InfoTrafic getInfoTrafic() {
+		return infoTrafic;
+	}
+
+
+	public void setInfoTrafic(InfoTrafic infoTrafic) {
+		this.infoTrafic = infoTrafic;
+	}
+
+
+	public Geolocalisation getGeo() {
+		return geo;
+	}
+
 
 	public HashMap<String,Station> getStations() {
 		return stations;

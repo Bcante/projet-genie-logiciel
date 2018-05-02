@@ -4,6 +4,7 @@ import java.awt.*;
 import java.io.Serializable;
 import java.util.Map;
 
+@SuppressWarnings("serial")
 public class Geolocalisation implements Serializable {
 
     private Map<String,Station> stations;
@@ -12,7 +13,7 @@ public class Geolocalisation implements Serializable {
         this.stations = stations;
     }
 
-    public Station trouveStationProche(Utilisateur u) {
+    public Station findCloseStation(Utilisateur u) {
         Point depart = new Point(u.getX(),u.getY());
         Point dest = null;
         Station laPlusProche = null;
