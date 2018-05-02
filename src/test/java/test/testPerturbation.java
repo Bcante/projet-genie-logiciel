@@ -1,5 +1,6 @@
 package test;
 
+import Main.IHM;
 import Main.Plan;
 import metroproject.*;
 import org.junit.jupiter.api.BeforeAll;
@@ -13,16 +14,27 @@ import java.util.LinkedHashSet;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class testPerturbation {
-	static Plan p=new Plan();
+	static IHM i;
 	static Metro m;
+	static Plan p=new Plan();
 	static Ligne l1;
 	static InfoTrafic info;
 	static Station s1;
+
+	@BeforeAll
+	static void init() {
+		i = new IHM();
+		info = i.getInfo();
+		m = i.getM();
+	}
+
 	@BeforeEach
-	void beforeAll() {
-		m=p.creerMetroParis();
+	void beforeEach() {
+
+		m = i.getM();
+		i = new IHM();
 		l1 = m.getLignes().get("1");
-		info = m.getInfoTrafic();
+		info = i.getInfo();
 		s1 = m.getStation("Bourse");
 	}
 
@@ -83,6 +95,7 @@ public class testPerturbation {
 	@DisplayName("Info sur station: aucun rail accidenté")
 	void stationAucunPb() {
 		assertEquals(info.problemeDuneStation(s1).size(),0);
+
 	}
 
 	@Test

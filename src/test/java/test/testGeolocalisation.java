@@ -2,9 +2,11 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import metroproject.Geolocalisation;
 import metroproject.Metro;
 import metroproject.Station;
 import metroproject.Utilisateur;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,15 +15,16 @@ import java.util.HashMap;
 public class testGeolocalisation {
 
 
-    HashMap<String,Station> simpleStations = new HashMap<>();
-    Metro simpleM = new Metro("simpleM",simpleStations,null);
+    static HashMap<String,Station> simpleStations = new HashMap<>();
+    Geolocalisation g = new Geolocalisation(simpleStations);
 
     /* Metro pour cas particulier*/
     HashMap<String,Station> penibleStation = new HashMap<>();
-    Metro penibleM = new Metro("penibleM",penibleStation, null);
+    Geolocalisation g2 = new Geolocalisation(penibleStation);
 
-    @BeforeEach
-    public void constructeur(){
+
+    @BeforeAll
+    public static void constructeur(){
         Station s1 = new Station(5,5,"5 5");
         Station s2 = new Station(5,100,"5 100");
         Station s3 = new Station(-1,-1,"-1 -1");
@@ -38,29 +41,28 @@ public class testGeolocalisation {
     @Test
     public void memeEndroit() {
         Utilisateur u = new Utilisateur(5,5,"Bob");
-        String res = simpleM.trouveStationPlusProche(u);
+        String res = g.trouveStationProche(u).getNomStation();
         assertEquals(res,"5 5");
     }
 
     @Test
     public void casSimple() {
         Utilisateur u = new Utilisateur(21,17,"Bob");
-        String res = simpleM.trouveStationPlusProche(u);
+        String res = g.trouveStationProche(u).getNomStation();
         assertEquals(res,"20 20");
     }
 
     @Test
     public void presDuMauvais() {
         Utilisateur u = new Utilisateur(0,0,"Bob");
-        String res = simpleM.trouveStationPlusProche(u);
+        String res = g.trouveStationProche(u).getNomStation();
         assertEquals(res,"5 5");
     }
 
     @Test
     public void pasDeChoixPossible() {
         Utilisateur u = new Utilisateur(0,0,"Bob");
-        String res = penibleM.trouveStationPlusProche(u);
-        assertNull(res);
+        assertNull(g2.trouveStationProche(u));
     }
 
 }
