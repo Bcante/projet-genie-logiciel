@@ -45,7 +45,7 @@ public class testPerturbation {
 		Station s2, s3;
 		s2 = it.next();
 		s3 = it.next();
-		assertFalse(info.problemeRail2Station(s2,s3));
+		assertFalse(info.isIncidentBetweenStations(s2,s3));
 	}
 
 	@Test
@@ -57,14 +57,14 @@ public class testPerturbation {
 		s3 = it.next();
 		Rail rail1 = s2.getConnectionTo(s3);
 		rail1.setIncident(true);
-		assertTrue(info.problemeRail2Station(s2,s3));
+		assertTrue(info.isIncidentBetweenStations(s2,s3));
 	}
 
 	@Test
 	@DisplayName("Info sur ligne: Aucun problème")
 	void ligneAucunPb() {
 		System.out.println();
-		assertEquals(info.problemeSurLigne(l1).size(),0);
+		assertEquals(info.getRailIssueLine(l1).size(),0);
 	}
 	
 	@Test
@@ -77,7 +77,7 @@ public class testPerturbation {
 		Rail rail1 = s2.getConnectionTo(s3);
 
 		rail1.setIncident(true);
-		assertEquals(info.problemeSurLigne(l1).size(),1);
+		assertEquals(info.getRailIssueLine(l1).size(),1);
 	}
 
 	@Test
@@ -86,15 +86,15 @@ public class testPerturbation {
 		Ligne miniLigne = new Ligne("miniligne");
 		LinkedHashSet<Station> listL1 = new LinkedHashSet<Station>();
 		listL1.add(new Station("lele"));
-		assertEquals(0,info.problemeSurLigne(miniLigne).size());
+		assertEquals(0,info.getRailIssueLine(miniLigne).size());
 		miniLigne.setStationsLigneAller(listL1);
-		assertEquals(0,info.problemeSurLigne(miniLigne).size());
+		assertEquals(0,info.getRailIssueLine(miniLigne).size());
 	}
 
 	@Test
 	@DisplayName("Info sur station: aucun rail accidenté")
 	void stationAucunPb() {
-		assertEquals(info.problemeDuneStation(s1).size(),0);
+		assertEquals(info.getRailsIssueOfStation(s1).size(),0);
 
 	}
 
@@ -103,7 +103,7 @@ public class testPerturbation {
 	void station1Pb() {
 		Rail r = s1.getConnectionTo(m.getStation("FranklinDRoosvlet"));
 		r.setIncident(true);
-		assertEquals(info.problemeDuneStation(s1).size(),1);
+		assertEquals(info.getRailsIssueOfStation(s1).size(),1);
 	}
 
 

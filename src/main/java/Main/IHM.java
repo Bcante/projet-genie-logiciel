@@ -9,6 +9,7 @@ import java.util.LinkedHashSet;
 Classe contenant les méthodes directement appelables par un utilisateur
  */
 public class IHM {
+	
     private Plan p;
     private Metro m;
     private InfoTrafic info;
@@ -16,27 +17,28 @@ public class IHM {
     
     public IHM() {
         p=new Plan();
-        m=p.creerMetroParis();
+        m=p.createParisMetro();
         info = new InfoTrafic(m.getStations());
         geo = new Geolocalisation(m.getStations());
     }
 
     /* GeoLoc */
-    public String trouveStationPlusProche(Utilisateur u) {
-        Station res = geo.trouveStationProche(u);
+    public String findClosestStation(Utilisateur u) {
+        Station res = geo.findCloseStation(u);
         return (res == null ? null : res.getNomStation());
     }
 
-    public void modifierSaPosition(Utilisateur u, int nvX, int nvY) {
+    public void updatePosition(Utilisateur u, int nvX, int nvY) {
         u.setX(nvX);
         u.setY(nvY);
     }
+    
     /* Perturbations */
-    public String connaitrePerturbationStation(String nomStation) {
-        if (!ligneOuStationExistante(nomStation,"STATION")) {
+    public String getStationIssues(String nomStation) {
+        if (!existLineOrStation(nomStation,"STATION")) {
             return "Station inconnue.";
         }
-        LinkedHashSet<Rail> perturbations = info.problemeSurLigne(m.getLignes().get(nomStation));
+        LinkedHashSet<Rail> perturbations = info.getRailIssueLine(m.getLignes().get(nomStation));
 
         if (perturbations.isEmpty()) {
             return "Aucun problème pour la station "+nomStation;
@@ -54,19 +56,18 @@ public class IHM {
         return res.substring(0,res.length()-2);
     }
 
-    public String connaitrePerturbationsLigne(String nomLigne) {
-        if (!ligneOuStationExistante(nomLigne, "LIGNE")) {
+    public String getLineIssues(String nomLigne) {
+        if (!existLineOrStation(nomLigne, "LIGNE")) {
             return "Ligne inconnue.";
         }
         Ligne li = m.getLignes().get(nomLigne);
-        LinkedHashSet<Rail> perturbations = info.problemeSurLigne(li);
+        LinkedHashSet<Rail> perturbations = info.getRailIssueLine(li);
 
         if (perturbations.isEmpty()) {
             return "Pas de problème sur la ligne "+nomLigne;
         }
 
         Iterator<Rail> it = perturbations.iterator();
-        String res;
 
         StringBuilder rep = new StringBuilder("Perturbations sur les rails suivants: ");
 
@@ -78,7 +79,7 @@ public class IHM {
         return rep.toString();
     }
 
-    private boolean ligneOuStationExistante(String nom, String type) {
+    private boolean existLineOrStation(String nom, String type) {
         if (type.equals("STATION")) {
             Station s = m.getStations().get(nom);
             return (s==null ? false : true);
@@ -91,11 +92,11 @@ public class IHM {
     }
 
     /* Avoir un chemin */
-    public void cheminLePlusCourt(Station debut, Station fin) {
+    public void shorterRoute(Station debut, Station fin) {
 
     }
 
-    public void cheminQuiPasseParXEndroit(Station debut, Station fin, Station intermediaire) {
+    public void routeWithMultipleStation(Station debut, Station fin, Station intermediaire) {
 
     }
 

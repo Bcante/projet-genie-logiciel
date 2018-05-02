@@ -11,7 +11,7 @@ import metroproject.Station;
 
 public class Plan {
 
-	public Metro creerMetroParis() {
+	public Metro createParisMetro() {
 		Metro metroParis = new Metro("Paris");
 
 		HashMap<String, Station> listeStation = new HashMap<String, Station>();

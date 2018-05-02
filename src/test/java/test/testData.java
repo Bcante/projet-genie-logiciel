@@ -17,7 +17,7 @@ public class testData {
 	
 	@BeforeAll
 	static void beforeAll() {
-		m=p.creerMetroParis();
+		m=p.createParisMetro();
 	}
 	
 	@Test
