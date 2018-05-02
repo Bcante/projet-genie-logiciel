@@ -118,7 +118,12 @@ class testMetro {
 	@DisplayName("Suppression rail")
 	void deleteRailTest() {
 		m.addRail(s1,s2 , 5, false);
+		System.out.println(s1.getRails());
+
 		m.delRail(s1, s2);
+		System.out.println(s1.getRails());
+		System.out.println(m.areConnected(s1, s2));
+		
 		assertFalse(m.areConnected(s1, s2));
 	}
 	
