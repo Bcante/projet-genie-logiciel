@@ -13,6 +13,7 @@ public class IHM {
     private Metro m;
     private InfoTrafic info;
     private Geolocalisation geo;
+    
     public IHM() {
         p=new Plan();
         m=p.creerMetroParis();

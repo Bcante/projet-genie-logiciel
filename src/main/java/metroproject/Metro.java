@@ -79,8 +79,6 @@ public class Metro implements Serializable{
 	public void addRail(Station start, Station destination, int duree, boolean incident) {
 		Rail railToAdd = new Rail(start,destination, duree,incident);
 		this.rails.add(railToAdd);
-		start.addRailtoStation(railToAdd);
-		destination.addRailtoStation(railToAdd);
 	}
 	
 	public void addStation(String nom) {
@@ -102,7 +100,6 @@ public class Metro implements Serializable{
 				if (vu.indexOf(sauvegarde.get(0))==-1) { //la station n'a pas été parcourue
 					parcours.add(sauvegarde.get(0)); //la station est dans le parcours
 					vu.add(sauvegarde.get(0)); //elle a été vue
-					System.out.println(sauvegarde.get(0).getNomStation());
 				}
 				if(sauvegarde.get(0).equals(s2)) {
 					existe=true;
