@@ -6,19 +6,21 @@ import java.util.ArrayList;
 @SuppressWarnings("serial")
 public class Station implements Serializable{
 	
-	String nomStation;
-	ArrayList<Rail> rails;
+	private String nomStation;
+	private ArrayList<Rail> rails;
 	private int x,y;
+	private int[] stations;
 
-    public Station(int x, int y, String nomStation) {
+    public Station(int x, int y, String nomStation, int[]stations) {
         this.x = x;
         this.y = y;
         this.nomStation = nomStation;
         this.rails = new ArrayList<Rail>();
+        this.stations=stations;
     }
 
-    public Station(String nomStation) {
-		this(-1,-1,nomStation);
+    public Station(String nomStation, int[]stations) {
+		this(-1,-1,nomStation,stations);
 	}
 
 	public Station(ArrayList<Rail> rails) {
@@ -83,5 +85,9 @@ public class Station implements Serializable{
 
     public int getY() {
         return y;
+    }
+    
+    public void getLignes() {
+    	
     }
 }

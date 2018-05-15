@@ -1,11 +1,16 @@
 package Main;
 
+import java.util.ArrayList;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+
+import metroproject.Station;
+import metroproject.Utilisateur;
 
 public class Application {
 
@@ -29,7 +34,10 @@ public class Application {
 		CommandLineParser parser = new DefaultParser();
 		
 		//initialisations des valeurs
-		String[] res;
+		String[] res=new String[2];
+		String depart;
+		ArrayList<Station> path=new ArrayList<Station>();
+		IHM utilisation=new IHM();
 		try {
 			CommandLine line = parser.parse(options, args);
 			geoloc=line.getOptionValue("g");
@@ -38,8 +46,10 @@ public class Application {
 			if (res.length!=2) {
 				throw new ParseException(geoloc);
 			}
+			Utilisateur u=new Utilisateur(Integer.parseInt(res[0]), Integer.parseInt(res[1]),"xxx");
+			depart=utilisation.findClosestStation(u);
 			if (line.hasOption("lp")) {
-				//chemin avec le moins de changements
+				utilisation.shortestPath(utilisation.getM().getStation(depart), utilisation.getM().getStation(depart));
 			}
 			else if (line.hasOption("cp")) {
 				//itinéraire perso
@@ -50,6 +60,8 @@ public class Application {
 		}catch(ParseException e){
 			System.out.println("Problème de parsing. Les argument -g (géolocalisation) et -d (Station de destination) sont-ils bien renseignés?");
 		}
+		
+		
 		
 		
 	

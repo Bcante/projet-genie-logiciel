@@ -93,8 +93,8 @@ public class Metro implements Serializable{
 		this.rails.add(railToAdd);
 	}
 	
-	public void addStation(String nom) {
-		Station stationToAdd = new Station(nom);
+	public void addStation(String nom,int[] lignes) {
+		Station stationToAdd = new Station(nom,lignes);
 		this.stations.put(nom,stationToAdd);
 	}
 	
