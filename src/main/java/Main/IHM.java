@@ -2,6 +2,7 @@ package Main;
 
 import metroproject.*;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 
@@ -14,12 +15,14 @@ public class IHM {
     private Metro m;
     private InfoTrafic info;
     private Geolocalisation geo;
+    private PathFinder pf;
     
     public IHM() {
         p=new Plan();
         m=p.createParisMetro();
         info = new InfoTrafic(m.getStations());
         geo = new Geolocalisation(m.getStations());
+        pf = new PathFinder();
     }
 
     /* GeoLoc */
@@ -92,12 +95,20 @@ public class IHM {
     }
 
     /* Avoir un chemin */
-    public void shorterRoute(Station debut, Station fin) {
-
+    public String shortestPath(Station debut, Station fin) {
+    	ArrayList<Station>res=pf.shortestPath(debut, fin);
+    	//Depart: Station ___
+    	//Ligne 3 Direction blabla jusqu'à
+    	String defpath="Départ: Station "+res.get(0).getNomStation();
+    	int i=1;
+    	while (i<res.size()) {
+    		
+    	}
+    	return defpath;
     }
 
     public void routeWithMultipleStation(Station debut, Station fin, Station intermediaire) {
-
+    
     }
 
     public Plan getP() {
