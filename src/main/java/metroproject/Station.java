@@ -18,9 +18,21 @@ public class Station implements Serializable{
         this.rails = new ArrayList<Rail>();
         this.stations=stations;
     }
+    
+    public Station(int x, int y, String nomStation) {
+        this.x = x;
+        this.y = y;
+        this.nomStation = nomStation;
+        this.rails = new ArrayList<Rail>();
+        stations=new int[] {0};
+    }
 
     public Station(String nomStation, int[]stations) {
 		this(-1,-1,nomStation,stations);
+	}
+    
+    public Station(String nomStation) {
+		this(-1,-1,nomStation,new int[] {0});
 	}
 
 	public Station(ArrayList<Rail> rails) {
