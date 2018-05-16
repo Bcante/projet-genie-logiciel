@@ -106,14 +106,9 @@ public class IHM {
     	}
     	return defpath;
     }
-    
-    public String blbla(Station debut, Station fin) {
-    	
-    	return "a";
-    }
 
     public void routeWithMultipleStation(Station debut, Station fin, Station intermediaire) {
-    
+    	ArrayList<Station>res=pf.customPath(debut, fin, intermediaire);
     }
 
     public Plan getP() {

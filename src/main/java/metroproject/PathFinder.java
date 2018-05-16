@@ -71,4 +71,12 @@ public class PathFinder {
         }
         return queue;
     }
+    
+    public ArrayList<Station> customPath(Station s1, Station s2, Station intermediaire){
+    	ArrayList<Station> firstHalf=shortestPath(s1,intermediaire);
+    	ArrayList<Station> secondHalf=shortestPath(intermediaire,s2);
+    	secondHalf.remove(0); //remove pour qu'il n'y ai pas de doublon de la station intermédiaire
+    	firstHalf.addAll(secondHalf);
+    	return firstHalf;
+    }
 }

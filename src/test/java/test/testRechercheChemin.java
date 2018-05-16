@@ -63,6 +63,7 @@ public class testRechercheChemin {
 	}
 	
 	@Test
+	@DisplayName("Le comparateur de chemins fonctionne")
 	void pathComparatorTestLessThan() {
 		ArrayList<Station> path1=new ArrayList<Station>();
 		ArrayList<Station> path2=new ArrayList<Station>();
@@ -100,6 +101,14 @@ public class testRechercheChemin {
 		expected.add(m.getStation("Barbes"));
 		res=pf.shortestPath(m.getStation("Esplanade"), m.getStation("Barbes"));
 		assertEquals(res,expected);
+	}
+	
+	@Test
+	@DisplayName("Test de l'itinéraire personnalisé: verification que l'itinéraire contient bien la station intermédiaire")
+	void hasIntermediaire() {
+		ArrayList<Station> res=null;
+		res=pf.customPath(m.getStation("CharlesDeGaulle"), m.getStation("Jaures"), m.getStation("Argentine"));
+		assertEquals(true,res.contains(m.getStation("Argentine")));
 	}
 	
 
