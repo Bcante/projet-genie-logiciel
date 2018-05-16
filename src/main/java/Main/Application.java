@@ -38,6 +38,7 @@ public class Application {
 		String depart;
 		ArrayList<Station> path=new ArrayList<Station>();
 		IHM utilisation=new IHM();
+		String outUser="";
 		try {
 			CommandLine line = parser.parse(options, args);
 			geoloc=line.getOptionValue("g");
@@ -49,21 +50,20 @@ public class Application {
 			Utilisateur u=new Utilisateur(Integer.parseInt(res[0]), Integer.parseInt(res[1]),"xxx");
 			depart=utilisation.findClosestStation(u);
 			if (line.hasOption("lp")) {
-				utilisation.shortestPath(utilisation.getM().getStation(depart), utilisation.getM().getStation(depart));
+				//itinéraire avec le moins de changements 
 			}
 			else if (line.hasOption("cp")) {
 				//itinéraire perso
 			}
 			else {
 				//chemin le plus rapide (par défaut)
+				outUser=utilisation.shortestPath(utilisation.getM().getStation(depart), utilisation.getM().getStation(depart));
+
 			}
 		}catch(ParseException e){
 			System.out.println("Problème de parsing. Les argument -g (géolocalisation) et -d (Station de destination) sont-ils bien renseignés?");
 		}
-		
-		
-		
-		
+		System.out.println(outUser);
 	
 	}
 	
