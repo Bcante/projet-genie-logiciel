@@ -59,7 +59,7 @@ public class Plan {
 		// LigneCommune
 		listeStation.put("CharlesDeGaulle", new Station("CharlesDeGaulle",new int[]{1,2,4}));// 1 et 2 et 4
 		listeStation.put("Concorde", new Station("Concorde",new int[]{1,3,5}));// 1,3,5
-		listeStation.put("Esplanade", new Station("Esplanade",new int[]{5}));// 2,4
+		listeStation.put("Esplanade", new Station("Esplanade",new int[]{2,4}));// 2,4
 		listeStation.put("FranklinDRoosvlet", new Station("FranklinDRoosvlet",new int[]{2,3}));// 2,3
 		listeStation.put("ColonnelFabien", new Station("ColonnelFabien",new int[]{2,3}));// 2,3
 		listeStation.put("Courcelles", new Station("Courcelles",new int[]{4,5}));// 4,5
@@ -93,7 +93,7 @@ public class Plan {
 		listeRail.add(new Rail(listeStation.get("ColonnelFabien"), listeStation.get("Barbes"), 1,false));
 		listeRail.add(new Rail(listeStation.get("Barbes"), listeStation.get("Pigalle"), 3,false));
 		
-		listL2.add(listeStation.get("ALexandreDumas"));
+		listL2.add(listeStation.get("AlexandreDumas"));
 		listL2.add(listeStation.get("Anvers"));
 		listL2.add(listeStation.get("Esplanade"));
 		listL2.add(listeStation.get("FranklinDRoosvlet"));

@@ -99,8 +99,5 @@ public class Station implements Serializable{
     public int getY() {
         return y;
     }
-    
-    public void getLignes() {
-    	
-    }
+  
 }

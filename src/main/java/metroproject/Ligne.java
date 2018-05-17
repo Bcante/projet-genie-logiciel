@@ -90,4 +90,19 @@ public class Ligne implements Serializable{
         }
 		return terminus;
 	}
+	
+	public String toString() {
+		String res = "";
+		res += "Ligne "+this.numero +" aller : \n";
+		for(Station s : this.stationsLigneAller) {
+			res += s.getNomStation() + " ";
+		}
+		res += "\n";
+		res += "Ligne "+this.numero +" retour : \n";
+		for(Station s : this.stationsLigneRetour) {
+			res += s.getNomStation() + " ";
+		}
+		res += "\n";
+		return res;
+	}
 }

@@ -162,4 +162,16 @@ public class Metro implements Serializable{
 			this.stations.remove(station.getNomStation());
 		}
 	}
+	
+	public Ligne getLigneBetwweenStation(Station station1, Station station2) {
+		Ligne result = null;
+		for (String key : this.lignes.keySet()) {
+			Ligne ligne = this.lignes.get(key);
+			if(ligne.getStationsLigne().contains(station1) && ligne.getStationsLigne().contains(station2)) {
+				result = ligne;
+				break;
+			}
+		}
+		return result;
+	}
 }
