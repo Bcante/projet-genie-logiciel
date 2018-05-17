@@ -96,8 +96,6 @@ public class testRechercheChemin {
 		//Chemin le + rapide d'Esplanade à Barbès: E-> FranklinDRoosevelt-> Colonnel Fabien -> Barbes
 		ArrayList<Station> res=null;
 		ArrayList<Station> expected=new ArrayList<Station>();
-		Rail casse = m.getStation("Esplanade").getConnectionTo(m.getStation("FranklinDRoosvlet"));
-		casse.setIncident(true);
 		expected.add(m.getStation("Esplanade"));
 		expected.add(m.getStation("FranklinDRoosvlet"));
 		expected.add(m.getStation("ColonnelFabien"));
@@ -112,6 +110,29 @@ public class testRechercheChemin {
 		ArrayList<Station> res=null;
 		res=pf.customPath(m.getStation("CharlesDeGaulle"), m.getStation("Jaures"), m.getStation("Argentine"));
 		assertEquals(true,res.contains(m.getStation("Argentine")));
+	}
+	@Test
+	@DisplayName("Prise en compte des incidents sur les voies")
+	void testIncident() {
+		ArrayList<Station> res=null;
+		Rail casse = m.getStation("Esplanade").getConnectionTo(m.getStation("FranklinDRoosvlet"));
+		casse.setIncident(true);
+		res=pf.shortestPath(m.getStation("Esplanade"), m.getStation("Barbes"));
+		//test qu'aucun rail n'aille d'Esplanade à FrankDRoosvlet
+		boolean notOnCasse=true;
+		for (int i=0;i<res.size()-1;i++) {
+			if (res.get(i).getNomStation().equals("Esplanade")) {
+				if (res.get(i+1).getNomStation().equals("FranklinDRoosvlet")) {
+					notOnCasse=false;
+				}
+			}
+			else if (res.get(i).getNomStation().equals("FranklinDRoosvlet")) {
+				if (res.get(i+1).getNomStation().equals("Esplanade")) {
+					notOnCasse=false;
+				}
+			}
+		}
+		assertEquals(true,notOnCasse);
 	}
 	
 

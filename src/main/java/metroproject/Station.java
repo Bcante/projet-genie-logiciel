@@ -77,11 +77,6 @@ public class Station implements Serializable{
 					}
 				}
 			}
-			else {
-				if (rail.getArrivee() == this) {
-					listResult.add(rail.getDepart());
-				}
-			}
 		}
 		return listResult;
 	}
