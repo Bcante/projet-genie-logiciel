@@ -81,7 +81,7 @@ class testMetro {
 	@DisplayName("Ajout d'un rail")
 	void addRailTest() {
 		m.addRail(s1,s2 , 5, false);
-		assertEquals(s2, s1.getConnections().get(0));
+		assertEquals(s2, s1.getConnections(true).get(0));
 	}
 	
 	@Test

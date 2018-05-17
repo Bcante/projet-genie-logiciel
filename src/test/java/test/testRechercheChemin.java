@@ -4,15 +4,12 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import metroproject.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import Main.Plan;
-import metroproject.Metro;
-import metroproject.PathComparator;
-import metroproject.PathFinder;
-import metroproject.Station;
 
 public class testRechercheChemin {
 	static Plan p=new Plan();
@@ -95,6 +92,10 @@ public class testRechercheChemin {
 		//Chemin le + rapide d'Esplanade à Barbès: E-> FranklinDRoosevelt-> Colonnel Fabien -> Barbes
 		ArrayList<Station> res=null;
 		ArrayList<Station> expected=new ArrayList<Station>();
+
+		Rail casse = m.getStation("Esplanade").getConnectionTo(m.getStation("FranklinDRoosvlet"));
+		casse.setIncident(true);
+
 		expected.add(m.getStation("Esplanade"));
 		expected.add(m.getStation("FranklinDRoosvlet"));
 		expected.add(m.getStation("ColonnelFabien"));

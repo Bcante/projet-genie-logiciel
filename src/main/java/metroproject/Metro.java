@@ -107,7 +107,7 @@ public class Metro implements Serializable{
 		boolean existe=false;
 		parcours.add(s1); //point de départ
 		while ((parcours.size()!=0)&(existe==false)) {
-		ArrayList<Station> sauvegarde=parcours.get(0).getConnections();
+		ArrayList<Station> sauvegarde=parcours.get(0).getConnections(true);
 			while(sauvegarde.size()!=0) {
 				if (vu.indexOf(sauvegarde.get(0))==-1) { //la station n'a pas été parcourue
 					parcours.add(sauvegarde.get(0)); //la station est dans le parcours

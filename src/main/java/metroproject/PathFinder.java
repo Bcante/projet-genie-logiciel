@@ -26,7 +26,7 @@ public class PathFinder {
             chemin=queue.get(0); //on prend le premier chemin de la queue
             queue.remove(0); // et on le retire de la queue
             //former les sucesseurs à ce chemin
-            sauvegarde=chemin.get(chemin.size()-1).getConnections(); //save des connections du dernier chemin
+            sauvegarde=chemin.get(chemin.size()-1).getConnections(true); //save des connections du dernier chemin
             while (sauvegarde.size()!=0) { //développer les successeurs
                 if (vu.indexOf(sauvegarde.get(0))==-1) { //la station n'a pas été développée
                     ArrayList<Station> newChemin=new ArrayList<>(chemin);

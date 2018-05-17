@@ -36,7 +36,7 @@ class testStation {
 	@Test
 	void testGetConnectionsTest() {
 		s1.addRailtoStation(r);
-		assertEquals(s2, s1.getConnections().get(0));
+		assertEquals(s2, s1.getConnections(true).get(0));
 	}
 	
 	
@@ -45,7 +45,7 @@ class testStation {
 	@DisplayName("Une connection n'a pas de sens")
 	void testGetConnectionsSensInverseTest() {
 		s1.addRailtoStation(r);
-		assertEquals(s2, s1.getConnections().get(0));
+		assertEquals(s2, s1.getConnections(true).get(0));
 	}
 
 }

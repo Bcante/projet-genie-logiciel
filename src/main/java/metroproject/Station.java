@@ -65,15 +65,16 @@ public class Station implements Serializable{
 	}
 	
 	//retournes les stations directements liées à la station
-	public ArrayList<Station> getConnections(){
+	public ArrayList<Station> getConnections(boolean workingOnly){
 		ArrayList<Station> listResult = new ArrayList<Station>();
 		for(Rail rail : rails) {
-			if(rail.getDepart() == this) {
-				listResult.add(rail.getArrivee());
-			}
-			else {
-				if (rail.getArrivee() == this) {
-					listResult.add(rail.getDepart());
+			if (!rail.isIncident() || !workingOnly) {
+				if (rail.getDepart() == this) {
+					listResult.add(rail.getArrivee());
+				} else {
+					if (rail.getArrivee() == this) {
+						listResult.add(rail.getDepart());
+					}
 				}
 			}
 		}
