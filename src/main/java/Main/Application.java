@@ -1,6 +1,7 @@
 package Main;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -15,7 +16,7 @@ import metroproject.Utilisateur;
 public class Application {
 
 	public static void main(String[] args) {
-		String geoloc;
+	/*	String geoloc;
 		String dest;
 		Options options=new Options();
 		Option geolocalisation=new Option("g","geolocalisation",true,"Géolocalisation de l'utilisateur");
@@ -58,13 +59,55 @@ public class Application {
 			else {
 				//chemin le plus rapide (par défaut)
 				outUser=utilisation.shortestPath(utilisation.getM().getStation(depart), utilisation.getM().getStation(depart));
-
 			}
 		}catch(ParseException e){
 			System.out.println("Problème de parsing. Les argument -g (géolocalisation) et -d (Station de destination) sont-ils bien renseignés?");
 		}
-		System.out.println(outUser);
-	
+		System.out.println(outUser);*/
+
+		int choix = 0;
+		Scanner scanner = new Scanner(System.in);
+		Utilisateur user = new Utilisateur(0,0,"Bobby McUserinton")
+		do {
+			System.out.println("Menu principal");
+			System.out.println("0- Quitter");
+			System.out.println("1- Trouver un chemin");
+			System.out.println("2- Maj position");
+			System.out.println("3- Connaitre les perturbations");
+			choix = Integer.parseInt(scanner.nextLine());
+
+			switch (choix) {
+				case 1:
+					findPath();
+					break;
+				case 2:
+					majLoc(user);
+					break;
+				case 3:
+					getInfoPerturbations();
+					break;
+				default:
+					choix = -1;
+			}
+		} while (choix != 0);
+
 	}
-	
+
+	private static void majLoc(Utilisateur u) {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Indiquez la nouvelle coordonnée X: ");
+		int newX = Integer.parseInt(scanner.nextLine());
+		System.out.println("Indiquez la nouvelle coordonnée Y: ");
+		int newY = Integer.parseInt(scanner.nextLine());
+		u.setX(newX);
+		u.setY(newY);
+	}
+
+	private static void getInfoPerturbations() {
+	}
+
+	private static void findPath() {
+	}
+
+
 }
