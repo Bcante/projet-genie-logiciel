@@ -83,7 +83,7 @@ public class IHM {
 		return rep.toString();
 	}
 
-	private boolean existLineOrStation(String nom, String type) {
+	public boolean existLineOrStation(String nom, String type) {
 		if (type.equals("STATION")) {
 			Station s = m.getStations().get(nom);
 			return (s == null ? false : true);

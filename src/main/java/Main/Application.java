@@ -14,7 +14,7 @@ import metroproject.Station;
 import metroproject.Utilisateur;
 
 public class Application {
-
+	static IHM ihm;
 	public static void main(String[] args) {
 	/*	String geoloc;
 		String dest;
@@ -65,9 +65,12 @@ public class Application {
 		}
 		System.out.println(outUser);*/
 
+
+		ihm = new IHM();
 		int choix = 0;
 		Scanner scanner = new Scanner(System.in);
-		Utilisateur user = new Utilisateur(0,0,"Bobby McUserinton")
+		Utilisateur user = new Utilisateur(0,0,"Bobby McUserinton");
+
 		do {
 			System.out.println("Menu principal");
 			System.out.println("0- Quitter");
@@ -78,7 +81,7 @@ public class Application {
 
 			switch (choix) {
 				case 1:
-					findPath();
+					findPath(user);
 					break;
 				case 2:
 					majLoc(user);
@@ -106,8 +109,37 @@ public class Application {
 	private static void getInfoPerturbations() {
 	}
 
-	private static void findPath() {
+	private static void findPath(Utilisateur u) {
+		String closestStation = ihm.findClosestStation(u);
+		System.out.println("Indiquez la station de destination: ");
+		Scanner scanner = new Scanner(System.in);
+		String destination = scanner.nextLine();
+		if (ihm.existLineOrStation(destination, "STATION")) {
+			askPreferredPath(ihm.getM().getStation(closestStation), ihm.getM().getStation(destination));
+		}
+		else {
+			System.out.println("Destination inconnue.");
+		}
 	}
+
+	private static void askPreferredPath(Station dep, Station dest) {
+		System.out.println("1- Je veux m'y rendre le plus rapidement possible");
+		System.out.println("2- Je veux minimiser les correspondances");
+		Scanner scanner = new Scanner(System.in);
+		int choix = Integer.parseInt(scanner.nextLine());
+
+		switch (choix) {
+			case 1:
+				String res = ihm.shortestPath(dep,dest);
+				System.out.println(res);
+				break;
+			case 2:
+				break;
+			default:
+				break;
+		}
+	}
+
 
 
 }
