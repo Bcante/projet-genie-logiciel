@@ -163,7 +163,7 @@ public class Metro implements Serializable{
 		}
 	}
 	
-	public Ligne getLigneBetwweenStation(Station station1, Station station2) {
+	public Ligne getLigneBetweenStation(Station station1, Station station2) {
 		Ligne result = null;
 		for (String key : this.lignes.keySet()) {
 			Ligne ligne = this.lignes.get(key);

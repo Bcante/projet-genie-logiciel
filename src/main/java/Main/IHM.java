@@ -111,7 +111,7 @@ public class IHM {
 		String defpath = "Voici votre itinéraire de " + debut.getNomStation() + " vers " + fin.getNomStation() + "\n";
 		int i = 0;
 		int j;
-		Ligne temp = m.getLigneBetwweenStation(res.get(0), res.get(1));
+		Ligne temp = m.getLigneBetweenStation(res.get(0), res.get(1));
 		defpath += " - Prendre la ligne " + temp.getNumero() + " en direction de " + res.get(1).getNomStation() +"\n";
 		while (i < res.size()) {
 			if (i != res.size() - 1) {
@@ -120,7 +120,7 @@ public class IHM {
 				j = i + 1;
 				Station nextStation = res.get(j);
 				String nomNextStation = nextStation.getNomStation();
-				Ligne ligne = m.getLigneBetwweenStation(station, nextStation);
+				Ligne ligne = m.getLigneBetweenStation(station, nextStation);
 				if (!temp.equals(ligne)) {
 					defpath += " - Descendre à " + nomStation + " et prendre la ligne " + ligne.getNumero() + " à destination de " + nomNextStation + "\n";
 					temp = ligne;
@@ -151,10 +151,4 @@ public class IHM {
 		return geo;
 	}
 
-	public static void main(String[] args) {
-		IHM ihm = new IHM();
-		Station station1 = ihm.m.getStation("AlexandreDumas");
-		Station station2 = ihm.m.getStation("Blanche");
-		System.out.println(ihm.shortestPath(station1, station2));
-	}
 }

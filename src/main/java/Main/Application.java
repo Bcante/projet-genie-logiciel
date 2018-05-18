@@ -77,9 +77,12 @@ public class Application {
 			System.out.println("1- Trouver un chemin");
 			System.out.println("2- Maj position");
 			System.out.println("3- Connaitre les perturbations");
+			System.out.println("4- Connaitre la station la plus proche");
 			choix = Integer.parseInt(scanner.nextLine());
 
 			switch (choix) {
+				case 0:
+					break;
 				case 1:
 					findPath(user);
 					break;
@@ -89,6 +92,8 @@ public class Application {
 				case 3:
 					getInfoPerturbations();
 					break;
+				case 4:
+					System.out.println("Station la plus proche: "+ihm.findClosestStation(user));
 				default:
 					choix = -1;
 			}
@@ -107,6 +112,25 @@ public class Application {
 	}
 
 	private static void getInfoPerturbations() {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Souhaitez vous connaître les perturbations sur\n" +
+				"1- Une ligne\n" +
+				"2- Une station");
+		int choix = Integer.parseInt(scanner.nextLine());
+		switch (choix) {
+			case 1:
+				System.out.println("Indiquez le numéro de la ligne.");
+				String ligne = scanner.nextLine();
+				System.out.println(ihm.getLineIssues(ligne));
+				break;
+			case 2:
+				System.out.println("Indiquez le nom de la station.");
+				String station = scanner.nextLine();
+				System.out.println(ihm.getStationIssues(station));
+				break;
+			default:
+				break;
+		}
 	}
 
 	private static void findPath(Utilisateur u) {
@@ -124,7 +148,7 @@ public class Application {
 
 	private static void askPreferredPath(Station dep, Station dest) {
 		System.out.println("1- Je veux m'y rendre le plus rapidement possible");
-		System.out.println("2- Je veux minimiser les correspondances");
+		System.out.println("2- Je veux minimiser les correspondances NON IMPLEMENTEE PR LE MOMENT");
 		Scanner scanner = new Scanner(System.in);
 		int choix = Integer.parseInt(scanner.nextLine());
 
