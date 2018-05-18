@@ -1,6 +1,7 @@
 package metroproject;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 
 public class PathFinder {
@@ -8,12 +9,29 @@ public class PathFinder {
     public PathFinder() {
 
     }
-
     public ArrayList<Station> shortestPath(Station s1, Station s2){
-        /*initialisations*/
+    	PathComparator comparator=new PathComparator();
+    	return findPath(s1, s2, comparator);
+    }
+    
+    public ArrayList<Station> customPath(Station s1, Station s2, Station intermediaire){
+    	ArrayList<Station> firstHalf=shortestPath(s1,intermediaire);
+    	ArrayList<Station> secondHalf=shortestPath(intermediaire,s2);
+    	secondHalf.remove(0); //remove pour qu'il n'y ai pas de doublon de la station intermédiaire
+    	firstHalf.addAll(secondHalf);
+    	return firstHalf;
+    }
+    
+    public ArrayList<Station> leastLineChange(Station s1, Station s2){
+    	PathComparatorLines comparator=new PathComparatorLines();
+    	return findPath(s1, s2, comparator);
+    }
+
+    private ArrayList<Station> findPath(Station s1, Station s2,Comparator<ArrayList<Station>> comparator){
+    	 /*initialisations*/
         ArrayList<Station> vu = new ArrayList<Station>(); //les stations déjà développées
         ArrayList<ArrayList<Station>> queue=new ArrayList<ArrayList<Station>>(); //notre queue de chemins
-        PathComparator comparator=new PathComparator();
+        //PathComparator comparator=new PathComparator();
         boolean done=false;
         ArrayList<Station> ini=new ArrayList<Station>();
         ini.add(s1);
@@ -52,7 +70,6 @@ public class PathFinder {
         else {
             return queue.get(0);
         }
-
     }
 
     private ArrayList<ArrayList<Station>> delLongPaths(ArrayList<ArrayList<Station>> queue){
@@ -73,11 +90,5 @@ public class PathFinder {
         return queue;
     }
     
-    public ArrayList<Station> customPath(Station s1, Station s2, Station intermediaire){
-    	ArrayList<Station> firstHalf=shortestPath(s1,intermediaire);
-    	ArrayList<Station> secondHalf=shortestPath(intermediaire,s2);
-    	secondHalf.remove(0); //remove pour qu'il n'y ai pas de doublon de la station intermédiaire
-    	firstHalf.addAll(secondHalf);
-    	return firstHalf;
-    }
+
 }

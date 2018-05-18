@@ -2,6 +2,7 @@ package metroproject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 @SuppressWarnings("serial")
 public class Station implements Serializable{
@@ -9,22 +10,30 @@ public class Station implements Serializable{
 	private String nomStation;
 	private ArrayList<Rail> rails;
 	private int x,y;
-	private int[] stations;
+	private HashSet<Integer> lines;
+	//private int[] lines;
 
-    public Station(int x, int y, String nomStation, int[]stations) {
+    public Station(int x, int y, String nomStation, int[]lines) {
         this.x = x;
         this.y = y;
         this.nomStation = nomStation;
         this.rails = new ArrayList<Rail>();
-        this.stations=stations;
+        this.lines=new HashSet<Integer>();
+        for (int i=0;i<lines.length;i++) {
+        	this.lines.add(lines[i]);
+        }
     }
     
-    public Station(int x, int y, String nomStation) {
+    public HashSet<Integer> getLines() {
+		return lines;
+	}
+
+	public Station(int x, int y, String nomStation) {
         this.x = x;
         this.y = y;
         this.nomStation = nomStation;
         this.rails = new ArrayList<Rail>();
-        stations=new int[] {0};
+        lines=new HashSet<Integer>();
     }
 
     public Station(String nomStation, int[]stations) {
