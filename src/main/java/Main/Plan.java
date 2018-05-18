@@ -27,43 +27,44 @@ public class Plan {
 
 		// Ligne 1 Argentine -> ChampsElysee
 
-		listeStation.put("Argentine", new Station("Argentine",new int[]{1}));
-		listeStation.put("Bastille", new Station("Bastille",new int[]{1}));
-		listeStation.put("Berault", new Station("Berault",new int[]{1}));
-		listeStation.put("ChampsElysee", new Station("ChampsElysee",new int[]{1}));
+		listeStation.put("Argentine", new Station(55,89,"Argentine",new int[]{1}));
+		listeStation.put("Bastille", new Station(57,73,"Bastille",new int[]{1}));
+		listeStation.put("Berault", new Station(60,39,"Berault",new int[]{1}));
+		listeStation.put("ChampsElysee", new Station(61,17,"ChampsElysee",new int[]{1}));
 
 		// Ligne 2 AlexandreDumas -> Pigalle
-		listeStation.put("AlexandreDumas", new Station("AlexandreDumas",new int[]{2}));
-		listeStation.put("Anvers", new Station("Anvers",new int[]{2}));
-		listeStation.put("Avron", new Station("Avron",new int[]{2}));
-		listeStation.put("Barbes", new Station("Barbes",new int[]{2}));
-		listeStation.put("Pigalle", new Station("Pigalle",new int[]{2}));
+		listeStation.put("AlexandreDumas", new Station(10,60,"AlexandreDumas",new int[]{2}));
+		listeStation.put("Anvers", new Station(19,58,"Anvers",new int[]{2}));
+		listeStation.put("Avron", new Station(50,60,"Avron",new int[]{2}));
+		listeStation.put("Barbes", new Station(80,45,"Barbes",new int[]{2}));
+		listeStation.put("Pigalle", new Station(91,40,"Pigalle",new int[]{2}));
 
 		// Ligne 3
-		listeStation.put("AnatoleFrance", new Station("AnatoleFrance",new int[]{3}));
-		listeStation.put("ArtsEtMetiers", new Station("ArtsEtMetiers",new int[]{3}));
-		listeStation.put("Bourse", new Station("Bourse",new int[]{3}));
-		listeStation.put("Europe", new Station("Europe",new int[]{3}));
+		listeStation.put("AnatoleFrance", new Station(100,10,"AnatoleFrance",new int[]{3}));
+		listeStation.put("ArtsEtMetiers", new Station(91,22,"ArtsEtMetiers",new int[]{3}));
+		listeStation.put("Bourse", new Station(31,33,"Bourse",new int[]{3}));
+		listeStation.put("Europe", new Station(88,79,"Europe",new int[]{3}));
 
 		// Ligne 4
-		listeStation.put("ChateauDeVincennes", new Station("ChateauDeVincennes",new int[]{4}));
-		listeStation.put("Chatelet", new Station("Chatelet",new int[]{4}));
-		listeStation.put("Couronnes", new Station("Couronnes",new int[]{4}));
+		listeStation.put("ChateauDeVincennes", new Station(22,85,"ChateauDeVincennes",new int[]{4}));
+		listeStation.put("Chatelet", new Station(37,28,"Chatelet",new int[]{4}));
+		listeStation.put("Couronnes", new Station(9,22,"Couronnes",new int[]{4}));
 
 		// Ligne 5
-		listeStation.put("Belleville", new Station("Belleville",new int[]{5}));
-		listeStation.put("Blanche", new Station("Blanche",new int[]{5}));
-		listeStation.put("Gallieni", new Station("Gallieni",new int[]{5}));
-		listeStation.put("Gambetta", new Station("Gambetta",new int[]{5}));
+		listeStation.put("Belleville", new Station(83,34,"Belleville",new int[]{5}));
+		listeStation.put("Blanche", new Station(81,18,"Blanche",new int[]{5}));
+		listeStation.put("Gallieni", new Station(18,39,"Gallieni",new int[]{5}));
+		listeStation.put("Jaures", new Station(51,43,"Jaures",new int[]{5}));
+		listeStation.put("Gambetta", new Station(30,69,"Gambetta",new int[]{5}));
 
 		// LigneCommune
-		listeStation.put("CharlesDeGaulle", new Station("CharlesDeGaulle",new int[]{1,2,4}));// 1 et 2 et 4
-		listeStation.put("Concorde", new Station("Concorde",new int[]{1,3,5}));// 1,3,5
-		listeStation.put("Esplanade", new Station("Esplanade",new int[]{2,4}));// 2,4
-		listeStation.put("FranklinDRoosvlet", new Station("FranklinDRoosvlet",new int[]{2,3}));// 2,3
-		listeStation.put("ColonnelFabien", new Station("ColonnelFabien",new int[]{2,3}));// 2,3
-		listeStation.put("Courcelles", new Station("Courcelles",new int[]{4,5}));// 4,5
-		listeStation.put("Jaures", new Station("Jaures",new int[]{2,5}));// 2,5
+		listeStation.put("CharlesDeGaulle", new Station(60,55,"CharlesDeGaulle",new int[]{1,2,4}));// 1 et 2 et 4
+		listeStation.put("Concorde", new Station(67,30,"Concorde",new int[]{1,3,5}));// 1,3,5
+		listeStation.put("Esplanade", new Station(30,65,"Esplanade",new int[]{2,4}));// 2,4
+		listeStation.put("FranklinDRoosvlet", new Station(40,51,"FranklinDRoosvlet",new int[]{2,3}));// 2,3
+		listeStation.put("ColonnelFabien", new Station(71,59,"ColonnelFabien",new int[]{2,3}));// 2,3
+		listeStation.put("Courcelles", new Station(17,12,"Courcelles",new int[]{4,5}));// 4,5
+		
 		
 		metroParis.setStations(listeStation);
 		
