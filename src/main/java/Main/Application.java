@@ -1,15 +1,6 @@
 package Main;
 
-import java.util.ArrayList;
 import java.util.Scanner;
-
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
-
 import metroproject.Station;
 import metroproject.Utilisateur;
 
@@ -84,13 +75,13 @@ public class Application {
 				case 0:
 					break;
 				case 1:
-					findPath(user);
+					findPath(user, scanner);
 					break;
 				case 2:
-					majLoc(user);
+					majLoc(user, scanner);
 					break;
 				case 3:
-					getInfoPerturbations();
+					getInfoPerturbations(scanner);
 					break;
 				case 4:
 					System.out.println("Station la plus proche: "+ihm.findClosestStation(user));
@@ -101,8 +92,7 @@ public class Application {
 
 	}
 
-	private static void majLoc(Utilisateur u) {
-		Scanner scanner = new Scanner(System.in);
+	private static void majLoc(Utilisateur u, Scanner scanner) {
 		System.out.println("Indiquez la nouvelle coordonnée X: ");
 		int newX = Integer.parseInt(scanner.nextLine());
 		System.out.println("Indiquez la nouvelle coordonnée Y: ");
@@ -111,15 +101,14 @@ public class Application {
 		u.setY(newY);
 	}
 
-	private static void getInfoPerturbations() {
-		Scanner scanner = new Scanner(System.in);
+	private static void getInfoPerturbations(Scanner scanner) {
 		System.out.println("Souhaitez vous connaître les perturbations sur\n" +
 				"1- Une ligne\n" +
 				"2- Une station");
 		int choix = Integer.parseInt(scanner.nextLine());
 		switch (choix) {
 			case 1:
-				System.out.println("Indiquez le numéro de la ligne.");
+				System.out.println("Indiquez le numéro de la ligne (1 - 5).");
 				String ligne = scanner.nextLine();
 				System.out.println(ihm.getLineIssues(ligne));
 				break;
@@ -133,23 +122,22 @@ public class Application {
 		}
 	}
 
-	private static void findPath(Utilisateur u) {
+	private static void findPath(Utilisateur u, Scanner scanner) {
 		String closestStation = ihm.findClosestStation(u);
 		System.out.println("Indiquez la station de destination: ");
-		Scanner scanner = new Scanner(System.in);
+		//Scanner scanner = new Scanner(System.in);
 		String destination = scanner.nextLine();
 		if (ihm.existLineOrStation(destination, "STATION")) {
-			askPreferredPath(ihm.getM().getStation(closestStation), ihm.getM().getStation(destination));
+			askPreferredPath(ihm.getM().getStation(closestStation), ihm.getM().getStation(destination), scanner);
 		}
 		else {
 			System.out.println("Destination inconnue.");
 		}
 	}
 
-	private static void askPreferredPath(Station dep, Station dest) {
+	private static void askPreferredPath(Station dep, Station dest, Scanner scanner) {
 		System.out.println("1- Je veux m'y rendre le plus rapidement possible");
 		System.out.println("2- Je veux minimiser les correspondances NON IMPLEMENTEE PR LE MOMENT");
-		Scanner scanner = new Scanner(System.in);
 		int choix = Integer.parseInt(scanner.nextLine());
 
 		switch (choix) {
