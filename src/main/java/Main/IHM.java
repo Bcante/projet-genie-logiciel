@@ -41,7 +41,7 @@ public class IHM {
 		if (!existLineOrStation(nomStation, "STATION")) {
 			return "Station inconnue.";
 		}
-		LinkedHashSet<Rail> perturbations = info.getRailIssueLine(m.getLignes().get(nomStation));
+		LinkedHashSet<Rail> perturbations = info.getRailsIssueOfStation(m.getStation(nomStation));
 
 		if (perturbations.isEmpty()) {
 			return "Aucun problème pour la station " + nomStation;
