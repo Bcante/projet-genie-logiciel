@@ -125,14 +125,45 @@ public class Application {
 				int choix = Integer.parseInt(scanner.nextLine());
 				switch (choix) {
 				case 1:
-					System.out.println("Indiquez le numéro de la ligne (1 - 5).");
-					String ligne = scanner.nextLine();
-					System.out.println(ihm.getLineIssues(ligne));
+					boolean  find = false;
+					do {
+						System.out.println("Indiquez le numéro de la ligne (1 - 5, 0 pour annuler).");
+						String ligne = scanner.nextLine();
+						if(ihm.existLineOrStation(ligne, "LIGNE")) {
+							find = true;
+							System.out.println("");
+							System.out.println(ihm.getLineIssues(ligne));
+						}else {
+							if(ligne.equals("0")) {
+								find = true;
+							}else {
+
+								System.out.println("Ligne inconnue.");
+							}
+						}
+					}while(!find);
+					
 					break;
 				case 2:
-					System.out.println("Indiquez le nom de la station.");
-					String station = scanner.nextLine();
-					System.out.println(ihm.getStationIssues(station));
+					boolean  done = false;
+					do {
+						System.out.println("Indiquez le nom de la station. (0 pour annuler)");
+						String station = scanner.nextLine();
+						if(ihm.existLineOrStation(station, "STATION")) {
+							done = true;
+
+							System.out.println("");
+							System.out.println(ihm.getStationIssues(station));
+						}else {
+							if(station.equals("0")) {
+								done = true;
+							}else {
+
+								System.out.println("Station inconnue.");
+							}
+						}
+					}while(!done);
+					
 					break;
 				default:
 					break;
@@ -149,7 +180,7 @@ public class Application {
 	private static void findPath(Utilisateur u, Scanner scanner) {
 		String closestStation = ihm.findClosestStation(u);
 		
-		Boolean find = false;
+		boolean find = false;
 		do {
 			System.out.println("Indiquez la station de destination (0 pour annuler): ");
 			String destination = scanner.nextLine();
