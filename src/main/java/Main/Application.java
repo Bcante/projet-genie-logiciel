@@ -131,11 +131,10 @@ public class Application {
 						System.out.println("Indiquez le numéro de la ligne (1 - 5, 0 pour annuler).");
 						String ligne = scanner.nextLine();
 
-						if (ligne.equals("0")) {
+						if (!ligne.equals("0")) {
 							callIssueFunction(scanner, type, ligne);
-							find = true;
 						}
-
+						find = true;
 					} while (!find);
 
 					break;
@@ -173,8 +172,13 @@ public class Application {
 			String destinationGiven = scanner.nextLine();
 			Station depart = ihm.getM().getStation(closestStation);
 			Station destination = ihm.getM().getStation(destinationGiven);
-			callFunction(scanner, depart, destination, destination.getNomStation(), 3);
-			find = true;
+			if(destinationGiven.equals("0")){
+				find = true;
+			}else{
+				callFunction(scanner, depart, destination, destination.getNomStation(), 3);
+				find = true;
+			}
+
 		} while (!find);
 
 	}
@@ -202,7 +206,10 @@ public class Application {
 						System.out.println("Station de départ (0 pour annuler):");
 
 						String choiceStation = scanner.nextLine();
-						res = callFunction(scanner, dep, dest, choiceStation, 1);
+						if(!choiceStation.equals("0")){
+							callFunction(scanner, dep, dest, choiceStation, 1);
+						}
+
 						correctValue = true;
 					} while (!correctValue);
 
@@ -212,7 +219,10 @@ public class Application {
 						System.out.println("Station intermédiaire (0 pour annuler): ");
 
 						String choiceStation = scanner.nextLine();
-						res = callFunction(scanner, dep, dest, choiceStation, 4);
+						if(!choiceStation.equals("0")){
+							callFunction(scanner, dep, dest, choiceStation, 4);
+
+						}
 						correctValue = true;
 					} while (!correctValue);
 
@@ -222,7 +232,10 @@ public class Application {
 						System.out.println("Station de correspondance (0 pour annuler): ");
 						
 						String choiceStation = scanner.nextLine();
-						res = callFunction(scanner, dep, dest, choiceStation, 2);
+						if(!choiceStation.equals("0")){
+
+							callFunction(scanner, dep, dest, choiceStation, 2);
+						}
 						correctValue = true;
 						
 					}while(!correctValue);

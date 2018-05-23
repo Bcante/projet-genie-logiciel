@@ -136,6 +136,7 @@ public class IHM {
 				defpath += " - Prendre la ligne " + temp.getNumero() + " en direction de " + res.get(1).getNomStation() + "\n";
 				while (i < res.size()) {
 					if (i != res.size() - 1) {
+						System.out.println(res.get(i).getNomStation());
 						Station station = res.get(i);
 						String nomStation = station.getNomStation();
 						j = i + 1;
