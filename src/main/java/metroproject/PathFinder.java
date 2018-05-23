@@ -39,30 +39,36 @@ public class PathFinder {
         vu.add(s1);
         ArrayList<Station> chemin = new ArrayList<Station>();
         ArrayList<Station> sauvegarde=new ArrayList<Station>();
-        while(!done && queue.size()!=0) {
-            /*dérouler les fils*/
-            chemin=queue.get(0); //on prend le premier chemin de la queue
-            queue.remove(0); // et on le retire de la queue
-            //former les sucesseurs à ce chemin
-            
-            sauvegarde=chemin.get(chemin.size()-1).getConnections(true); //save des connections du dernier chemi
-            while (sauvegarde.size()!=0) { //développer les successeurs
-                if (vu.indexOf(sauvegarde.get(0))==-1) { //la station n'a pas été développée
-                    ArrayList<Station> newChemin=new ArrayList<>(chemin);
-                    newChemin.add(sauvegarde.get(0));
-                    queue.add(newChemin); //nouveau chemin ajouté
+        try {
+            while (!done && queue.size() > 0) {
+                /*dérouler les fils*/
+                chemin = queue.get(0); //on prend le premier chemin de la queue
+                queue.remove(0); // et on le retire de la queue
+                //former les sucesseurs à ce chemin
+
+                sauvegarde = chemin.get(chemin.size() - 1).getConnections(true); //save des connections du dernier chemi
+                while (sauvegarde.size() != 0) { //développer les successeurs
+                    if (vu.indexOf(sauvegarde.get(0)) == -1) { //la station n'a pas été développée
+                        ArrayList<Station> newChemin = new ArrayList<>(chemin);
+                        newChemin.add(sauvegarde.get(0));
+                        queue.add(newChemin); //nouveau chemin ajouté
+                    }
+                    sauvegarde.remove(0);
                 }
-                sauvegarde.remove(0);
+                vu.add(chemin.get(chemin.size() - 1)); // on ajoute à vu le noeud développé
+                //on classe la queue
+                queue.sort(comparator);
+                //supprimer les chemins nuls de la liste
+                queue = delLongPaths(queue);
+                //si le premier chemin atteint la destination, on s'arrête là
+                if (queue.get(0).contains(s2)) {
+                    done = true;
+                }
             }
-            vu.add(chemin.get(chemin.size()-1)); // on ajoute à vu le noeud développé
-            //on classe la queue
-            queue.sort(comparator);
-            //supprimer les chemins nuls de la liste
-            queue=delLongPaths(queue);
-            //si le premier chemin atteint la destination, on s'arrête là
-            if (queue.get(0).contains(s2)) {
-                done=true;
-            }
+        }catch(IndexOutOfBoundsException e){
+            ArrayList<Station> res = new ArrayList<>();
+            res.add(s2);
+            return res;
         }
         if (!done) {
             return null;

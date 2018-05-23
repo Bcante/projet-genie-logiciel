@@ -64,7 +64,7 @@ public class Plan {
 		listeStation.put("FranklinDRoosvlet", new Station(40,51,"FranklinDRoosvlet",new int[]{2,3}));// 2,3
 		listeStation.put("ColonnelFabien", new Station(71,59,"ColonnelFabien",new int[]{2,3}));// 2,3
 		listeStation.put("Courcelles", new Station(17,12,"Courcelles",new int[]{4,5}));// 4,5
-		
+
 		
 		metroParis.setStations(listeStation);
 		
@@ -111,7 +111,8 @@ public class Plan {
 		listeRail.add(new Rail(listeStation.get("Bourse"), listeStation.get("FranklinDRoosvlet"), 3,false));
 		listeRail.add(new Rail(listeStation.get("FranklinDRoosvlet"), listeStation.get("ColonnelFabien"), 2,false));
 		listeRail.add(new Rail(listeStation.get("ColonnelFabien"), listeStation.get("Barbes"), 1,false));
-		
+		listeRail.add(new Rail(listeStation.get("Barbes"), listeStation.get("Europe"), 1,false));
+
 		listL3.add(listeStation.get("AnatoleFrance"));
 		listL3.add(listeStation.get("ArtsEtMetiers"));
 		listL3.add(listeStation.get("Concorde"));

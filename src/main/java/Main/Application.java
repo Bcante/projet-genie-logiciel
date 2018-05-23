@@ -49,7 +49,7 @@ public class Application {
 		 * ); } System.out.println(outUser);
 		 */
 
-		ihm = new IHM();
+		ihm = new IHM("a");
 		int choix = 0;
 		Scanner scanner = new Scanner(System.in);
 		Utilisateur user = new Utilisateur(0, 0, "Bobby McUserinton");
