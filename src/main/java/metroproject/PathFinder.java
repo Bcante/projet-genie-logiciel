@@ -84,6 +84,7 @@ public class PathFinder {
             for(int i=0;i<queue.size();i++) {
                 if ((queue.get(i).contains(finalS)) && (comparator.compare(chemin, queue.get(i))==-1)) {
                     iteration.remove();
+                    break;
                 }
             }
         }

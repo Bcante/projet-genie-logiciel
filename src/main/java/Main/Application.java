@@ -247,7 +247,7 @@ public class Application {
 		boolean estInteger = false;
 		do {
 			try {
-				int value = sc.nextInt();
+				int value = Integer.parseInt(sc.nextLine());
 				res = value;
 				estInteger = true;
 			} catch (InputMismatchException e2) {
@@ -258,7 +258,7 @@ public class Application {
 
 		while (res < 0 || res > 100) {
 			showErrorMessage(wrongLocationValue);
-			res = sc.nextInt();
+			res = Integer.parseInt(sc.nextLine());
 		}
 
 		return res;
