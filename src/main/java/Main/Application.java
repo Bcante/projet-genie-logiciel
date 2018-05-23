@@ -125,45 +125,32 @@ public class Application {
 				int choix = Integer.parseInt(scanner.nextLine());
 				switch (choix) {
 				case 1:
-					boolean  find = false;
+					boolean find = false;
 					do {
+						String type = "Ligne";
 						System.out.println("Indiquez le numéro de la ligne (1 - 5, 0 pour annuler).");
 						String ligne = scanner.nextLine();
-						if(ihm.existLineOrStation(ligne, "LIGNE")) {
-							find = true;
-							System.out.println("");
-							System.out.println(ihm.getLineIssues(ligne));
-						}else {
-							if(ligne.equals("0")) {
-								find = true;
-							}else {
 
-								System.out.println("Ligne inconnue.");
-							}
+						if (ligne.equals("0")) {
+							callIssueFunction(scanner, type, ligne);
+							find = true;
 						}
-					}while(!find);
-					
+
+					} while (!find);
+
 					break;
 				case 2:
-					boolean  done = false;
+					boolean done = false;
 					do {
 						System.out.println("Indiquez le nom de la station. (0 pour annuler)");
+						String type = "Station";
 						String station = scanner.nextLine();
-						if(ihm.existLineOrStation(station, "STATION")) {
+						if (station.equals("0")) {
+							callIssueFunction(scanner, type, station);
 							done = true;
-
-							System.out.println("");
-							System.out.println(ihm.getStationIssues(station));
-						}else {
-							if(station.equals("0")) {
-								done = true;
-							}else {
-
-								System.out.println("Station inconnue.");
-							}
 						}
-					}while(!done);
-					
+					} while (!done);
+
 					break;
 				default:
 					break;
@@ -179,63 +166,55 @@ public class Application {
 
 	private static void findPath(Utilisateur u, Scanner scanner) {
 		String closestStation = ihm.findClosestStation(u);
-		
+
 		boolean find = false;
 		do {
 			System.out.println("Indiquez la station de destination (0 pour annuler): ");
-			String destination = scanner.nextLine();
-			if (ihm.existLineOrStation(destination, "STATION")) {
-				askPreferredPath(ihm.getM().getStation(closestStation), ihm.getM().getStation(destination), scanner);
-				find = true;
-			} else {
-				if(destination.equals("0")) {
-					find = true;
-				}else {
-					System.out.println("Destination inconnue.");
-				}
-			}
-		}while(!find);
-		
+			String destinationGiven = scanner.nextLine();
+			Station depart = ihm.getM().getStation(closestStation);
+			Station destination = ihm.getM().getStation(destinationGiven);
+			callFunction(scanner, depart, destination, destination.getNomStation(), 3);
+			find = true;
+		} while (!find);
+
 	}
 
 	private static void askPreferredPath(Station dep, Station dest, Scanner scanner) {
 		boolean choose = false;
 		do {
-			String res ="";
+			String res = "";
 			try {
 				System.out.println("1- Je veux m'y rendre le plus rapidement possible");
 				System.out.println("2- Le plus rapidement, à partir d'une station");
 				System.out.println("3- Je veux minimiser les correspondances NON IMPLEMENTEE PR LE MOMENT");
 				System.out.println("Defaut- Retour au menu");
 				int choix = Integer.parseInt(scanner.nextLine());
-		
+				boolean correctValue = false;
 				switch (choix) {
+
 				case 1:
 					res = ihm.shortestPath(dep, dest);
 					System.out.println(res);
 					break;
 				case 2:
-					boolean find = false;
-					String depart;
 					do {
 						System.out.println("Station de départ (0 pour annuler):");
-						depart = scanner.nextLine();
-					
-						if (!find && ihm.existLineOrStation(depart, "STATION")) {
-							res = ihm.shortestPath(ihm.getM().getStation(depart), dest);
-							find = true;
-							System.out.println(res);
-						}else {
-							if(depart.equals("0")) {
-								find = true;
-							}else {
-								System.out.println("Station inconnue");
-							}
-						}
-					}while (!find);
-					
+
+						String choiceStation = scanner.nextLine();
+						res = callFunction(scanner, dep, dest, choiceStation, 1);
+						correctValue = true;
+					} while (!correctValue);
+
 					break;
 				case 3:
+					do {
+						System.out.println("Station intermédiaire (0 pour annuler): ");
+
+						String choiceStation = scanner.nextLine();
+						res = callFunction(scanner, dep, dest, choiceStation, 2);
+						correctValue = true;
+					} while (!correctValue);
+
 					break;
 				default:
 					break;
@@ -246,7 +225,7 @@ public class Application {
 			} catch (InputMismatchException e3) {
 				showErrorMessage(incorrectValue);
 			}
-		}while(!choose);
+		} while (!choose);
 	}
 
 	public static void showErrorMessage(String message) {
@@ -270,6 +249,66 @@ public class Application {
 		while (res < 0 || res > 100) {
 			showErrorMessage(wrongLocationValue);
 			res = sc.nextInt();
+		}
+
+		return res;
+	}
+
+	private static String callFunction(Scanner scanner, Station dep, Station dest, String choiceStation,
+			int functionChoose) {
+		boolean find = false;
+		String res = "";
+		do {
+			if (!find && ihm.existLineOrStation(choiceStation, "STATION")) {
+				switch (functionChoose) {
+				case 1:
+					Station newDepart = ihm.getM().getStation(choiceStation);
+					res = ihm.shortestPath(newDepart, dest);
+					break;
+
+				case 2:
+					Station intermediaire = ihm.getM().getStation(choiceStation);
+					res = ihm.routeWithMultipleStation(dep, dest, intermediaire);
+					break;
+				case 3:
+					askPreferredPath(dep, dest, scanner);
+				}
+				find = true;
+				System.out.println(res);
+			} else {
+				if (choiceStation.equals("0")) {
+					find = true;
+				} else {
+					System.out.println(choiceStation);
+					System.out.println(ihm.existLineOrStation(choiceStation, "STATION"));
+					System.out.println("Station inconnue");
+					find = true;
+				}
+			}
+		} while (!find);
+		return res;
+	}
+
+	private static String callIssueFunction(Scanner scanner, String type, String numberLigneornameStation) {
+		String res = "";
+		switch (type.toUpperCase()) {
+		case "LIGNE":
+			if (ihm.existLineOrStation(numberLigneornameStation, type.toUpperCase())) {
+				System.out.println("");
+				System.out.println(ihm.getLineIssues(numberLigneornameStation));
+			} else {
+				System.out.println(type + " inconnue.");
+			}
+			break;
+
+		case "STATION":
+			if (ihm.existLineOrStation(numberLigneornameStation, type.toUpperCase())) {
+				System.out.println("");
+				System.out.println(ihm.getStationIssues(numberLigneornameStation));
+			} else {
+				System.out.println(type + " inconnue.");
+			}
+			break;
 		}
 
 		return res;
