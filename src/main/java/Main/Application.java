@@ -186,7 +186,8 @@ public class Application {
 			try {
 				System.out.println("1- Je veux m'y rendre le plus rapidement possible");
 				System.out.println("2- Le plus rapidement, à partir d'une station");
-				System.out.println("3- Je veux minimiser les correspondances NON IMPLEMENTEE PR LE MOMENT");
+				System.out.println("3- Je veux minimiser les correspondances");
+				System.out.println("4- Avec correspondance");
 				System.out.println("Defaut- Retour au menu");
 				int choix = Integer.parseInt(scanner.nextLine());
 				boolean correctValue = false;
@@ -211,11 +212,20 @@ public class Application {
 						System.out.println("Station intermédiaire (0 pour annuler): ");
 
 						String choiceStation = scanner.nextLine();
-						res = callFunction(scanner, dep, dest, choiceStation, 2);
+						res = callFunction(scanner, dep, dest, choiceStation, 4);
 						correctValue = true;
 					} while (!correctValue);
 
 					break;
+				case 4:
+					do {
+						System.out.println("Station de correspondance (0 pour annuler): ");
+						
+						String choiceStation = scanner.nextLine();
+						res = callFunction(scanner, dep, dest, choiceStation, 2);
+						correctValue = true;
+						
+					}while(!correctValue);
 				default:
 					break;
 				}
@@ -267,12 +277,17 @@ public class Application {
 					break;
 
 				case 2:
-					Station intermediaire = ihm.getM().getStation(choiceStation);
-					res = ihm.routeWithMultipleStation(dep, dest, intermediaire);
+					Station correspondance = ihm.getM().getStation(choiceStation);
+					res = ihm.routeWithMultipleStation(dep, dest, correspondance);
 					break;
 				case 3:
 					askPreferredPath(dep, dest, scanner);
+					break;
+				case 4:
+					res = ihm.leastLineChange(dep, dest);
+					break;
 				}
+				
 				find = true;
 				System.out.println(res);
 			} else {

@@ -104,6 +104,11 @@ public class IHM {
 		ArrayList<Station> res = pf.customPath(debut, fin, intermediaire);
 		return this.getItineraire(res);
 	}
+	
+	public String leastLineChange(Station debut, Station fin) {
+		ArrayList<Station> res = pf.leastLineChange(debut, fin);
+		return this.getItineraire(res);
+	}
 
 	public String getItineraire(ArrayList<Station> res) {
 		Station debut = res.get(0);
