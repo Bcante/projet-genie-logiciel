@@ -25,6 +25,21 @@ public class IHM {
 		pf = new PathFinder();
 	}
 
+	public IHM(String code) {
+		this();
+		crashParty();
+	}
+
+
+	public void crashParty() {
+		Rail r1 = m.getStation("Esplanade").
+				getConnectionTo(m.getStation("FranklinDRoosvlet"));
+		Rail r2 = m.getStation("ColonnelFabien").
+				getConnectionTo(m.getStation("FranklinDRoosvlet"));
+		r1.setIncident(true);
+		r2.setIncident(true);
+	}
+
 	/* GeoLoc */
 	public String findClosestStation(Utilisateur u) {
 		Station res = geo.findCloseStation(u);
