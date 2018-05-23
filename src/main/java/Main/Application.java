@@ -134,7 +134,6 @@ public class Application {
 						if (!ligne.equals("0")) {
 							callIssueFunction(scanner, type, ligne);
 						}
-						find = true;
 					} while (!find);
 
 					break;
@@ -216,13 +215,9 @@ public class Application {
 					break;
 				case 3:
 					do {
-						System.out.println("Station intermédiaire (0 pour annuler): ");
-
-						String choiceStation = scanner.nextLine();
-						if(!choiceStation.equals("0")){
-							callFunction(scanner, dep, dest, choiceStation, 4);
-
-						}
+						System.out.println("dep: "+dep.getNomStation());
+						System.out.println("dst: "+dest.getNomStation());
+						callFunction(scanner, dep, dest, dest.getNomStation(), 4);
 						correctValue = true;
 					} while (!correctValue);
 
