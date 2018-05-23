@@ -122,7 +122,6 @@ public class IHM {
 		return this.getItineraire(res);
 	}
 
-	@SuppressWarnings("null")
 	public String getItineraire(ArrayList<Station> res) {
 		String defpath = "";
 			if (res.size() > 1) {
@@ -130,18 +129,18 @@ public class IHM {
 				Station debut = res.get(0);
 				Station fin =  res.get(res.size() - 1);
 				defpath = "Voici votre itinéraire de " + debut.getNomStation() + " vers " + fin.getNomStation() + "\n";
-				int i = 0;
+				int i = 1;
 				int j;
 				Ligne temp = m.getLigneBetweenStation(res.get(0), res.get(1));
 				defpath += " - Prendre la ligne " + temp.getNumero() + " en direction de " + res.get(1).getNomStation() + "\n";
 				while (i < res.size()) {
 					if (i != res.size() - 1) {
-						System.out.println(res.get(i).getNomStation());
 						Station station = res.get(i);
 						String nomStation = station.getNomStation();
 						j = i + 1;
 						Station nextStation = res.get(j);
 						String nomNextStation = nextStation.getNomStation();
+						
 						Ligne ligne = m.getLigneBetweenStation(station, nextStation);
 						if (!temp.equals(ligne)) {
 							defpath += " - Descendre à " + nomStation + " et prendre la ligne " + ligne.getNumero() + " à destination de " + nomNextStation + "\n";
