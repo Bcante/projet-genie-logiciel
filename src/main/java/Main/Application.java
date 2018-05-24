@@ -133,6 +133,9 @@ public class Application {
 
 						if (!ligne.equals("0")) {
 							callIssueFunction(scanner, type, ligne);
+							find = true;
+						}else {
+							find = true;
 						}
 					} while (!find);
 
@@ -143,8 +146,10 @@ public class Application {
 						System.out.println("Indiquez le nom de la station. (0 pour annuler)");
 						String type = "Station";
 						String station = scanner.nextLine();
-						if (station.equals("0")) {
+						if (!station.equals("0")) {
 							callIssueFunction(scanner, type, station);
+							done = true;
+						}else {
 							done = true;
 						}
 					} while (!done);
