@@ -53,7 +53,6 @@ public class Application {
 		int choix = 0;
 		Scanner scanner = new Scanner(System.in);
 		Utilisateur user = new Utilisateur(0, 0, "Bobby McUserinton");
-
 		do {
 			showMenu();
 			while (!scanner.hasNextInt()) {
@@ -61,9 +60,10 @@ public class Application {
 				showMenu();
 				scanner.nextLine();
 			}
-
+		
 			choix = Integer.parseInt(scanner.nextLine());
-
+			
+			
 			switch (choix) {
 			case 0:
 				break;
@@ -179,7 +179,11 @@ public class Application {
 			if(destinationGiven.equals("0")){
 				find = true;
 			}else{
-				callFunction(scanner, depart, destination, destination.getNomStation(), 3);
+				if(destination != null) {
+					callFunction(scanner, depart, destination, "", 3);
+				}else {
+					System.out.println("Station inconnue");
+				}
 				find = true;
 			}
 
@@ -220,9 +224,7 @@ public class Application {
 					break;
 				case 3:
 					do {
-						System.out.println("dep: "+dep.getNomStation());
-						System.out.println("dst: "+dest.getNomStation());
-						callFunction(scanner, dep, dest, dest.getNomStation(), 4);
+						callFunction(scanner, dep, dest, "", 4);
 						correctValue = true;
 					} while (!correctValue);
 
@@ -280,9 +282,16 @@ public class Application {
 	private static String callFunction(Scanner scanner, Station dep, Station dest, String choiceStation,
 			int functionChoose) {
 		boolean find = false;
+		boolean ex;
 		String res = "";
+		if(choiceStation.equals("") && ihm.existLineOrStation(dest.getNomStation(), "STATION")) {
+			choiceStation = dest.getNomStation();
+			ex = true;
+		}else {
+			ex = false;
+		}
 		do {
-			if (!find && ihm.existLineOrStation(choiceStation, "STATION")) {
+			if (ex && !find && ihm.existLineOrStation(choiceStation, "STATION")) {
 				switch (functionChoose) {
 				case 1:
 					Station newDepart = ihm.getM().getStation(choiceStation);
@@ -307,8 +316,6 @@ public class Application {
 				if (choiceStation.equals("0")) {
 					find = true;
 				} else {
-					System.out.println(choiceStation);
-					System.out.println(ihm.existLineOrStation(choiceStation, "STATION"));
 					System.out.println("Station inconnue");
 					find = true;
 				}
